@@ -311,11 +311,11 @@
   #define THERMAL_PROTECTION_PERIOD        100 // (seconds)
   #define THERMAL_PROTECTION_HYSTERESIS     10 // (°C)
 
-  //#define ADAPTIVE_FAN_SLOWING              // Slow down the part-cooling fan if the temperature drops
+  #define ADAPTIVE_FAN_SLOWING              // Slow down the part-cooling fan if the temperature drops
   #if ENABLED(ADAPTIVE_FAN_SLOWING)
-    //#define REPORT_ADAPTIVE_FAN_SLOWING     // Report fan slowing activity to the console
+    #define REPORT_ADAPTIVE_FAN_SLOWING     // Report fan slowing activity to the console
     #if ANY(MPCTEMP, PIDTEMP)
-      //#define TEMP_TUNING_MAINTAIN_FAN      // Don't slow down the fan speed during M303 or M306 T
+      #define TEMP_TUNING_MAINTAIN_FAN      // Don't slow down the fan speed during M303 or M306 T
     #endif
   #endif
 
@@ -500,7 +500,7 @@
 
 // Show Temperature ADC value
 // Enable for M105 to include ADC values read from temperature sensors.
-//#define SHOW_TEMP_ADC_VALUES
+#define SHOW_TEMP_ADC_VALUES
 
 /**
  * High Temperature Thermistor Support
@@ -1205,9 +1205,9 @@
  *
  * Tune with M593 D<factor> F<frequency>
  */
-//#define INPUT_SHAPING_X
-//#define INPUT_SHAPING_Y
-//#define INPUT_SHAPING_Z
+#define INPUT_SHAPING_X // AVS
+#define INPUT_SHAPING_Y // AVS
+#define INPUT_SHAPING_Z // AVS
 #if ANY(INPUT_SHAPING_X, INPUT_SHAPING_Y, INPUT_SHAPING_Z)
   #if ENABLED(INPUT_SHAPING_X)
     #define SHAPING_FREQ_X  40.0        // (Hz) The default dominant resonant frequency on the X axis.
@@ -1223,7 +1223,7 @@
   #endif
   //#define SHAPING_MIN_FREQ  20.0      // (Hz) By default the minimum of the shaping frequencies. Override to affect SRAM usage.
   //#define SHAPING_MAX_STEPRATE 10000  // By default the maximum total step rate of the shaped axes. Override to affect SRAM usage.
-  //#define SHAPING_MENU                // Add a menu to the LCD to set shaping parameters.
+  #define SHAPING_MENU                // Add a menu to the LCD to set shaping parameters. // AVS
 #endif
 
 // @section motion
@@ -1402,7 +1402,7 @@
  * vibration and surface artifacts. The algorithm adapts to provide the best possible step smoothing at the
  * lowest stepping frequencies.
  */
-//#define ADAPTIVE_STEP_SMOOTHING
+#define ADAPTIVE_STEP_SMOOTHING // AVS
 
 /**
  * Custom Microstepping
