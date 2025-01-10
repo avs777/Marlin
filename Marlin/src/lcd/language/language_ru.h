@@ -441,10 +441,10 @@ namespace LanguageNarrow_ru {
   LSTR MSG_ZPROBE_OUT                       = _UxGT("Z-зонд вне стола");
   LSTR MSG_SKEW_FACTOR                      = _UxGT("Фактор перекоса");
   LSTR MSG_BLTOUCH                          = _UxGT("Z-зонд CRTouch");
-  LSTR MSG_BLTOUCH_SELFTEST                 = _UxGT("Тестирование");
-  LSTR MSG_BLTOUCH_RESET                    = _UxGT("Сброс");
-  LSTR MSG_BLTOUCH_STOW                     = _UxGT("Втянуть");
-  LSTR MSG_BLTOUCH_DEPLOY                   = _UxGT("Выдвинуть");
+  LSTR MSG_BLTOUCH_SELFTEST                 = _UxGT("Тестирование"); // AVS
+  LSTR MSG_BLTOUCH_RESET                    = _UxGT("Сброс"); // AVS
+  LSTR MSG_BLTOUCH_STOW                     = _UxGT("Втянуть"); // AVS
+  LSTR MSG_BLTOUCH_DEPLOY                   = _UxGT("Выдвинуть"); // AVS
   LSTR MSG_BLTOUCH_SW_MODE                  = _UxGT("Режим SW");
   LSTR MSG_BLTOUCH_5V_MODE                  = _UxGT("Режим 5V");
   LSTR MSG_BLTOUCH_OD_MODE                  = _UxGT("Режим OD");

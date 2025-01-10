@@ -308,14 +308,14 @@
  * THERMAL_PROTECTION_HYSTERESIS and/or THERMAL_PROTECTION_PERIOD
  */
 #if ALL(HAS_HOTEND, THERMAL_PROTECTION_HOTENDS)
-  #define THERMAL_PROTECTION_PERIOD        100 // (seconds)
-  #define THERMAL_PROTECTION_HYSTERESIS     10 // (°C)
+  #define THERMAL_PROTECTION_PERIOD        100 // (seconds) // AVS
+  #define THERMAL_PROTECTION_HYSTERESIS     10 // (°C) // AVS
 
-  #define ADAPTIVE_FAN_SLOWING              // Slow down the part-cooling fan if the temperature drops
+  #define ADAPTIVE_FAN_SLOWING              // Slow down the part-cooling fan if the temperature drops // AVS
   #if ENABLED(ADAPTIVE_FAN_SLOWING)
-    #define REPORT_ADAPTIVE_FAN_SLOWING     // Report fan slowing activity to the console
+    #define REPORT_ADAPTIVE_FAN_SLOWING     // Report fan slowing activity to the console // AVS
     #if ANY(MPCTEMP, PIDTEMP)
-      #define TEMP_TUNING_MAINTAIN_FAN      // Don't slow down the fan speed during M303 or M306 T
+      #define TEMP_TUNING_MAINTAIN_FAN      // Don't slow down the fan speed during M303 or M306 T // AVS
     #endif
   #endif
 
@@ -483,11 +483,11 @@
  * Enable Autotemp Mode with M104/M109 F<factor> S<mintemp> B<maxtemp>.
  * Disable by sending M104/M109 with no F parameter (or F0 with AUTOTEMP_PROPORTIONAL).
  */
-// #define AUTOTEMP
+#define AUTOTEMP
 #if ENABLED(AUTOTEMP)
   #define AUTOTEMP_OLDWEIGHT    0.98  // Factor used to weight previous readings (0.0 < value < 1.0)
   #define AUTOTEMP_MIN          210
-  #define AUTOTEMP_MAX          250
+  #define AUTOTEMP_MAX          300  // AVS
   #define AUTOTEMP_FACTOR       0.1f
   // Turn on AUTOTEMP on M104/M109 by default using proportions set here
   //#define AUTOTEMP_PROPORTIONAL
@@ -500,7 +500,7 @@
 
 // Show Temperature ADC value
 // Enable for M105 to include ADC values read from temperature sensors.
-#define SHOW_TEMP_ADC_VALUES
+#define SHOW_TEMP_ADC_VALUES // AVS
 
 /**
  * High Temperature Thermistor Support
@@ -553,8 +553,8 @@
  */
 #define HOTEND_IDLE_TIMEOUT
 #if ENABLED(HOTEND_IDLE_TIMEOUT)
-  #define HOTEND_IDLE_TIMEOUT_SEC (10*60)    // (seconds) Time without extruder movement to trigger protection
-  #define HOTEND_IDLE_MIN_TRIGGER   195     // (°C) Minimum temperature to enable hotend protection
+  #define HOTEND_IDLE_TIMEOUT_SEC (10*60)    // (seconds) Time without extruder movement to trigger protection  // AVS
+  #define HOTEND_IDLE_MIN_TRIGGER   195     // (°C) Minimum temperature to enable hotend protection  // AVS
   #define HOTEND_IDLE_NOZZLE_TARGET   0     // (°C) Safe temperature for the nozzle after timeout
   #define HOTEND_IDLE_BED_TARGET      0     // (°C) Safe temperature for the bed after timeout
 #endif
@@ -964,7 +964,7 @@
 
   // Safety: The probe needs time to recognize the command.
   //         Minimum command delay (ms). Enable and increase if needed.
-  #define BLTOUCH_DELAY 300
+  #define BLTOUCH_DELAY 300  // AVS
 
   /**
    * Settings for BLTOUCH Classic 1.2, 1.3 or BLTouch Smart 1.0, 2.0, 2.2, 3.0, 3.1, and most clones:
@@ -1011,7 +1011,7 @@
    *
    * Set the default state here, change with 'M401 S' or UI, use M500 to save, M502 to reset.
    */
-  #define BLTOUCH_HS_MODE true
+  #define BLTOUCH_HS_MODE true  // AVS
 
   #ifdef BLTOUCH_HS_MODE
     // The probe Z offset (M851 Z) is the height at which the probe triggers.
@@ -1207,14 +1207,14 @@
  */
 #define INPUT_SHAPING_X // AVS
 #define INPUT_SHAPING_Y // AVS
-#define INPUT_SHAPING_Z // AVS
+// #define INPUT_SHAPING_Z // AVS
 #if ANY(INPUT_SHAPING_X, INPUT_SHAPING_Y, INPUT_SHAPING_Z)
   #if ENABLED(INPUT_SHAPING_X)
-    #define SHAPING_FREQ_X  40.0        // (Hz) The default dominant resonant frequency on the X axis.
+    #define SHAPING_FREQ_X  28.3        // (Hz) The default dominant resonant frequency on the X axis.
     #define SHAPING_ZETA_X   0.15       // Damping ratio of the X axis (range: 0.0 = no damping to 1.0 = critical damping).
   #endif
   #if ENABLED(INPUT_SHAPING_Y)
-    #define SHAPING_FREQ_Y  40.0        // (Hz) The default dominant resonant frequency on the Y axis.
+    #define SHAPING_FREQ_Y  35.7        // (Hz) The default dominant resonant frequency on the Y axis.
     #define SHAPING_ZETA_Y   0.15       // Damping ratio of the Y axis (range: 0.0 = no damping to 1.0 = critical damping).
   #endif
   #if ENABLED(INPUT_SHAPING_Z)
@@ -1607,7 +1607,7 @@
       //#define BOOT_MARLIN_LOGO_ANIMATED // Animated Marlin logo. Costs ~3260 (or ~940) bytes of flash.
     #endif
     #if ANY(HAS_MARLINUI_U8GLIB, TOUCH_UI_FTDI_EVE, HAS_MARLINUI_HD44780)
-      //#define SHOW_CUSTOM_BOOTSCREEN    // Show the bitmap in Marlin/_Bootscreen.h on startup.
+      //#define SHOW_CUSTOM_BOOTSCREEN    // Show the bitmap in Marlin/_Bootscreen.h on startup.  // AVS
     #endif
   #endif
 
@@ -1747,11 +1747,11 @@
   // #define MENU_ADDAUTOSTART               // Add a menu option to run auto#.g files
 
   // #define ONE_CLICK_PRINT                 // Prompt to print the newest file on inserted media
-  #define BROWSE_MEDIA_ON_INSERT          // Open the file browser when media is inserted
+  // #define BROWSE_MEDIA_ON_INSERT          // Open the file browser when media is inserted
 
   #define MEDIA_MENU_AT_TOP               // Force the media menu to be listed on the top of the main menu
 
-  #define EVENT_GCODE_SD_ABORT "G28XY"      // G-code to run on SD Abort Print (e.g., "G28XY" or "G27")
+  #define EVENT_GCODE_SD_ABORT "G28XY\nG1 Y230 F2000"  // G-code to run on SD Abort Print (e.g., "G28XY" or "G27") // AVS
 
   #if ENABLED(PRINTER_EVENT_LEDS)
     #define PE_LEDS_COMPLETED_TIME  (30*60) // (seconds) Time to keep the LED "done" color before restoring normal illumination
@@ -1817,7 +1817,7 @@
    *  - SDSORT_CACHE_NAMES will retain the sorted file listing in RAM. (Expensive!)
    *  - SDSORT_DYNAMIC_RAM only uses RAM when the SD menu is visible. (Use with caution!)
    */
-  #define SDCARD_SORT_ALPHA
+  #define SDCARD_SORT_ALPHA  // AVS
 
   // SD Card Sorting options
   #if ENABLED(SDCARD_SORT_ALPHA)
@@ -1825,10 +1825,10 @@
     #define SDSORT_LIMIT       40     // Maximum number of sorted items (10-256). Costs 27 bytes each.
     #define SDSORT_FOLDERS     -1     // -1=above  0=none  1=below
     #define SDSORT_GCODE       false  // Enable G-code M34 to set sorting behaviors: M34 S<-1|0|1> F<-1|0|1>
-    #define SDSORT_USES_RAM    true   // Pre-allocate a static array for faster pre-sorting.
+    #define SDSORT_USES_RAM    true   // Pre-allocate a static array for faster pre-sorting.  // AVS
     #define SDSORT_USES_STACK  false  // Prefer the stack for pre-sorting to give back some SRAM. (Negated by next 2 options.)
-    #define SDSORT_CACHE_NAMES true   // Keep sorted items in RAM longer for speedy performance. Most expensive option.
-    #define SDSORT_DYNAMIC_RAM true  // Use dynamic allocation (within SD menus). Least expensive option. Set SDSORT_LIMIT before use!
+    #define SDSORT_CACHE_NAMES true   // Keep sorted items in RAM longer for speedy performance. Most expensive option.  // AVS
+    #define SDSORT_DYNAMIC_RAM true  // Use dynamic allocation (within SD menus). Least expensive option. Set SDSORT_LIMIT before use!  // AVS
     #define SDSORT_CACHE_VFATS 2      // Maximum number of 13-byte VFAT entries to use for sorting.
                                       // Note: Only affects SCROLL_LONG_FILENAMES with SDSORT_CACHE_NAMES but not SDSORT_DYNAMIC_RAM.
   #endif
@@ -1926,7 +1926,7 @@
   //#define CONFIGURATION_EMBEDDING
 
   // Add an optimized binary file transfer mode, initiated with 'M28 B1'
-  #define BINARY_FILE_TRANSFER
+  #define BINARY_FILE_TRANSFER  // AVS
 
   #if ENABLED(BINARY_FILE_TRANSFER)
     // Include extra facilities (e.g., 'M20 F') supporting firmware upload via BINARY_FILE_TRANSFER
@@ -2309,9 +2309,9 @@
     #endif
   #endif
 
-  #define BABYSTEP_DISPLAY_TOTAL          // Display total babysteps since last G28
+  #define BABYSTEP_DISPLAY_TOTAL          // Display total babysteps since last G28  // AVS
 
-  #define BABYSTEP_ZPROBE_OFFSET          // Combine M851 Z and Babystepping
+  #define BABYSTEP_ZPROBE_OFFSET          // Combine M851 Z and Babystepping  // AVS
   //#define BABYSTEP_GLOBAL_Z               // Combine M424 Z and Babystepping
 
   #if ANY(BABYSTEP_ZPROBE_OFFSET, BABYSTEP_GLOBAL_Z)
@@ -2339,13 +2339,13 @@
  *
  * See https://marlinfw.org/docs/features/lin_advance.html for full instructions.
  */
-#define LIN_ADVANCE
+#define LIN_ADVANCE  // AVS
 #if ENABLED(LIN_ADVANCE)
   #if ENABLED(DISTINCT_E_FACTORS)
     #define ADVANCE_K { 0.22 }    // (mm) Compression length per 1mm/s extruder speed, per extruder
   #else
     // set "0" for disables the hard-coded firmware value. In this case only the K-Factor set via the filament g-code "M900 Kxx" is used.
-    #define ADVANCE_K 0.0 //0.22  // (mm) Compression length applying to all extruders
+    #define ADVANCE_K 0.0 //0.22  // (mm) Compression length applying to all extruders  // AVS
   #endif
   //#define ADVANCE_K_EXTRA       // Add a second linear advance constant, configurable with M900 L.
   //#define LA_DEBUG              // Print debug information to serial during operation. Disable for production use.
@@ -2768,14 +2768,14 @@
  *
  * Note that M207 / M208 / M209 settings are saved to EEPROM.
  */
-#define FWRETRACT
+#define FWRETRACT  // AVS
 #if ENABLED(FWRETRACT)
   #define FWRETRACT_AUTORETRACT             // Override slicer retractions
   #if ENABLED(FWRETRACT_AUTORETRACT)
     #define MIN_AUTORETRACT             0.1 // (mm) Don't convert E moves under this length
     #define MAX_AUTORETRACT            10.0 // (mm) Don't convert E moves over this length
   #endif
-  #define RETRACT_LENGTH                3   // (mm) Default retract length (positive value)
+  #define RETRACT_LENGTH              0.4   // (mm) Default retract length (positive value)
   #define RETRACT_LENGTH_SWAP          13   // (mm) Default swap retract length (positive value)
   #define RETRACT_FEEDRATE             45   // (mm/s) Default feedrate for retracting
   #define RETRACT_ZRAISE                0   // (mm) Default retract Z-raise
@@ -2916,7 +2916,7 @@
  *
  * Enable PARK_HEAD_ON_PAUSE to add the G-code M125 Pause and Park.
  */
-#define ADVANCED_PAUSE_FEATURE
+#define ADVANCED_PAUSE_FEATURE  // AVS
 #if ENABLED(ADVANCED_PAUSE_FEATURE)
   #define PAUSE_PARK_RETRACT_FEEDRATE         60  // (mm/s) Initial retract feedrate.
   #define PAUSE_PARK_RETRACT_LENGTH            2  // (mm) Initial retract.
@@ -4084,13 +4084,13 @@
   //#define MAIN_MENU_ITEM_5_GCODE "G28\nM503"
   //#define MAIN_MENU_ITEM_5_CONFIRM
 
-  // #define MAIN_MENU_ITEM_6_DESC "Fan on"
-  // #define MAIN_MENU_ITEM_6_GCODE "M106 S255"
-  // //#define MAIN_MENU_ITEM_6_CONFIRM
+  // #define MAIN_MENU_ITEM_6_DESC "Fan on"  // AVS
+  // #define MAIN_MENU_ITEM_6_GCODE "M106 S255"  // AVS
+  // //#define MAIN_MENU_ITEM_6_CONFIRM  // AVS
 
-  // #define MAIN_MENU_ITEM_6_DESC "Fan off"
-  // #define MAIN_MENU_ITEM_6_GCODE "M107"
-  // //#define MAIN_MENU_ITEM_3_CONFIRM
+  // #define MAIN_MENU_ITEM_6_DESC "Fan off"  // AVS
+  // #define MAIN_MENU_ITEM_6_GCODE "M107"  // AVS
+  // //#define MAIN_MENU_ITEM_3_CONFIRM  // AVS
 #endif
 
 // @section custom config menu
@@ -4174,15 +4174,15 @@
  * Host Prompt Support enables Marlin to use the host for user prompts so
  * filament runout and other processes can be managed from the host side.
  */
-#define HOST_ACTION_COMMANDS
+#define HOST_ACTION_COMMANDS  // AVS
 #if ENABLED(HOST_ACTION_COMMANDS)
-  #define HOST_PAUSE_M76                // Tell the host to pause in response to M76
-  #define HOST_PROMPT_SUPPORT           // Initiate host prompts to get user feedback
+  #define HOST_PAUSE_M76                // Tell the host to pause in response to M76  // AVS
+  #define HOST_PROMPT_SUPPORT           // Initiate host prompts to get user feedback  // AVS
   #if ENABLED(HOST_PROMPT_SUPPORT)
-    #define HOST_STATUS_NOTIFICATIONS   // Send some status messages to the host as notifications
+    #define HOST_STATUS_NOTIFICATIONS   // Send some status messages to the host as notifications  // AVS
   #endif
-  #define HOST_START_MENU_ITEM          // Add a menu item that tells the host to start
-  #define HOST_SHUTDOWN_MENU_ITEM       // Add a menu item that tells the host to shut down
+  #define HOST_START_MENU_ITEM          // Add a menu item that tells the host to start  // AVS
+  #define HOST_SHUTDOWN_MENU_ITEM       // Add a menu item that tells the host to shut down  // AVS
 #endif
 
 // @section extras

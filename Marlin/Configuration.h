@@ -63,7 +63,7 @@
 // @section info
 
 // Author info of this build printed to the host during boot and M115
-#define STRING_CONFIG_H_AUTHOR "(AVS, Ender-3)" // Original author or contributor.
+#define STRING_CONFIG_H_AUTHOR "(AVS, Ender-3)" // Original author or contributor. // AVS
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
 // @section machine
@@ -133,7 +133,7 @@
 //#define BLUETOOTH
 
 // Name displayed in the LCD "Ready" message and Info menu
-#define CUSTOM_MACHINE_NAME "Ender-3_427"
+#define CUSTOM_MACHINE_NAME "Ender-3 4.2.7"
 
 // Printer's unique ID, used by some programs to differentiate between machines.
 // Choose your own or use a service like https://www.uuidgenerator.net/version4
@@ -156,9 +156,9 @@
  *          TMC5160, TMC5160_STANDALONE
  * :['A4988', 'A5984', 'DRV8825', 'LV8729', 'TB6560', 'TB6600', 'TMC2100', 'TMC2130', 'TMC2130_STANDALONE', 'TMC2160', 'TMC2160_STANDALONE', 'TMC2208', 'TMC2208_STANDALONE', 'TMC2209', 'TMC2209_STANDALONE', 'TMC2660', 'TMC2660_STANDALONE', 'TMC5130', 'TMC5130_STANDALONE', 'TMC5160', 'TMC5160_STANDALONE']
  */
-#define X_DRIVER_TYPE  TMC2208_STANDALONE
-#define Y_DRIVER_TYPE  TMC2208_STANDALONE
-#define Z_DRIVER_TYPE  TMC2208_STANDALONE
+#define X_DRIVER_TYPE TMC2208_STANDALONE  // AVS
+#define Y_DRIVER_TYPE TMC2208_STANDALONE  // AVS
+#define Z_DRIVER_TYPE TMC2208_STANDALONE  // AVS
 //#define X2_DRIVER_TYPE A4988
 //#define Y2_DRIVER_TYPE A4988
 //#define Z2_DRIVER_TYPE A4988
@@ -170,7 +170,7 @@
 //#define U_DRIVER_TYPE  A4988
 //#define V_DRIVER_TYPE  A4988
 //#define W_DRIVER_TYPE  A4988
-#define E0_DRIVER_TYPE TMC2208_STANDALONE
+#define E0_DRIVER_TYPE TMC2208_STANDALONE  // AVS
 //#define E1_DRIVER_TYPE A4988
 //#define E2_DRIVER_TYPE A4988
 //#define E3_DRIVER_TYPE A4988
@@ -571,7 +571,7 @@
  *   998 : Dummy Table that ALWAYS reads 25°C or the temperature defined below.
  *   999 : Dummy Table that ALWAYS reads 100°C or the temperature defined below.
  */
-#define TEMP_SENSOR_0 1047
+#define TEMP_SENSOR_0 1047 // AVS
 #define TEMP_SENSOR_1 0
 #define TEMP_SENSOR_2 0
 #define TEMP_SENSOR_3 0
@@ -655,7 +655,7 @@
 // Above this temperature the heater will be switched off.
 // This can protect components from overheating, but NOT from shorts and failures.
 // (Use MINTEMP for thermistor short/failure protection.)
-#define HEATER_0_MAXTEMP 315
+#define HEATER_0_MAXTEMP 315 // AVS
 #define HEATER_1_MAXTEMP 275
 #define HEATER_2_MAXTEMP 275
 #define HEATER_3_MAXTEMP 275
@@ -704,13 +704,13 @@
   #if ENABLED(PID_PARAMS_PER_HOTEND)
     // Specify up to one value per hotend here, according to your setup.
     // If there are fewer values, the last one applies to the remaining hotends.
-    #define DEFAULT_Kp_LIST {  17.00,  17.00 }
-    #define DEFAULT_Ki_LIST {   2.05,   2.05 }
-    #define DEFAULT_Kd_LIST {  35.40,  35.40 }
+    #define DEFAULT_Kp_LIST {  21.73,  21.73 }
+    #define DEFAULT_Ki_LIST {   1.54,   1.54 }
+    #define DEFAULT_Kd_LIST {  76.55,  76.55 }
   #else
-    #define DEFAULT_Kp  16.4
-    #define DEFAULT_Ki   2.01
-    #define DEFAULT_Kd  33.40
+    #define DEFAULT_Kp  16.90 // AVS
+    #define DEFAULT_Ki   2.05 // AVS
+    #define DEFAULT_Kd  34.80 // AVS
   #endif
 #else
   #define BANG_MAX 255    // Limit hotend current while in bang-bang mode; 255=full current
@@ -801,9 +801,9 @@
 
   // 120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   // from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
-  #define DEFAULT_bedKp 89.7
-  #define DEFAULT_bedKi 15.76
-  #define DEFAULT_bedKd 340.4
+  #define DEFAULT_bedKp 113.4 // AVS
+  #define DEFAULT_bedKi 21.48 // AVS
+  #define DEFAULT_bedKd 399.3 // AVS
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #else
@@ -1294,7 +1294,7 @@
  * Override with M92 (when enabled below)
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 96.68 }
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 424.9 } // AVS
 
 /**
  * Enable support for M92. Disable to save at least ~530 bytes of flash.
@@ -1306,11 +1306,11 @@
  * Override with M203
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_FEEDRATE          { 300, 300, 20, 50 } // AVS
+#define DEFAULT_MAX_FEEDRATE          { 500, 500, 20, 30 } // AVS
 
-//#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
+#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
-  #define MAX_FEEDRATE_EDIT_VALUES    { 600, 600, 20, 100 } // ...or, set your own edit limits
+  #define MAX_FEEDRATE_EDIT_VALUES    { 1000, 1000, 40, 60 } // ...or, set your own edit limits // AVS
 #endif
 
 /**
@@ -1319,11 +1319,11 @@
  * Override with M201
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_ACCELERATION      { 500, 500, 100, 1000 } // AVS
+#define DEFAULT_MAX_ACCELERATION      { 1000, 1000, 200, 5000 } // AVS
 
-//#define LIMITED_MAX_ACCEL_EDITING     // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
+#define LIMITED_MAX_ACCEL_EDITING     // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
 #if ENABLED(LIMITED_MAX_ACCEL_EDITING)
-  #define MAX_ACCEL_EDIT_VALUES       { 2500, 2500, 200, 2000 } // ...or, set your own edit limits
+  #define MAX_ACCEL_EDIT_VALUES       { 2500, 2500, 400, 10000 } // ...or, set your own edit limits
 #endif
 
 /**
@@ -1334,9 +1334,9 @@
  *   M204 R    Retract Acceleration
  *   M204 T    Travel Acceleration
  */
-#define DEFAULT_ACCELERATION           500    // X, Y, Z and E acceleration for printing moves
+#define DEFAULT_ACCELERATION           1000    // X, Y, Z and E acceleration for printing moves // AVS
 #define DEFAULT_RETRACT_ACCELERATION   1000   // E acceleration for retracts
-#define DEFAULT_TRAVEL_ACCELERATION    1500   // X, Y, Z acceleration for travel (non printing) moves
+#define DEFAULT_TRAVEL_ACCELERATION    2500   // X, Y, Z acceleration for travel (non printing) moves // AVS
 
 /**
  * Default Jerk limits (mm/s)
@@ -1348,9 +1348,9 @@
  */
 //#define CLASSIC_JERK
 #if ENABLED(CLASSIC_JERK)
-  #define DEFAULT_XJERK  8.0
-  #define DEFAULT_YJERK  8.0
-  #define DEFAULT_ZJERK  0.4
+  #define DEFAULT_XJERK  10.0
+  #define DEFAULT_YJERK  10.0
+  #define DEFAULT_ZJERK  0.3
   #define DEFAULT_EJERK  5.0
   //#define DEFAULT_IJERK  0.3
   //#define DEFAULT_JJERK  0.3
@@ -1388,7 +1388,7 @@
  *
  * See https://github.com/synthetos/TinyG/wiki/Jerk-Controlled-Motion-Explained
  */
-#define S_CURVE_ACCELERATION
+#define S_CURVE_ACCELERATION // AVS
 
 //===========================================================================
 //============================= Z Probe Options =============================
@@ -1404,10 +1404,10 @@
  * The probe replaces the Z-MIN endstop and is used for Z homing.
  * (Automatically enables USE_PROBE_FOR_Z_HOMING.)
  */
-// #define Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN
+// #define Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN // AVS
 
 // Force the use of the probe for Z-axis homing
-#define USE_PROBE_FOR_Z_HOMING
+#define USE_PROBE_FOR_Z_HOMING // AVS
 
 /**
  * Z_MIN_PROBE_PIN
@@ -1640,7 +1640,7 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-#define NOZZLE_TO_PROBE_OFFSET { -43, -3, 0 }
+#define NOZZLE_TO_PROBE_OFFSET { -50, -5, 0 } // AVS
 
 // Enable and set to use a specific tool for probing. Disable to allow any tool.
 #define PROBING_TOOL 0
@@ -1650,14 +1650,14 @@
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
-#define PROBING_MARGIN 15
+#define PROBING_MARGIN 15 // AVS
 
 // X and Y axis travel speed between probes.
 // Leave undefined to use the average of the current XY homing feedrate.
 #define XY_PROBE_FEEDRATE    (150*60) // (mm/min) // AVS
 
 // Feedrate for the first approach when double-probing (MULTIPLE_PROBING == 2)
-#define Z_PROBE_FEEDRATE_FAST  (20*60) // (mm/min) //AVS
+#define Z_PROBE_FEEDRATE_FAST  (15*60) // (mm/min) // AVS
 
 // Feedrate for the "accurate" probe of each point
 #define Z_PROBE_FEEDRATE_SLOW (Z_PROBE_FEEDRATE_FAST / 2) // (mm/min)
@@ -1708,8 +1708,8 @@
  * A total of 2 does fast/slow probes with a weighted average.
  * A total of 3 or more adds more slow probes, taking the average.
  */
-#define MULTIPLE_PROBING 2
-#define EXTRA_PROBING    1
+#define MULTIPLE_PROBING 2 // AVS
+#define EXTRA_PROBING    1 // AVS
 
 /**
  * Z probes require clearance when deploying, stowing, and moving between
@@ -1770,8 +1770,8 @@
 // Require minimum nozzle and/or bed temperature for probing
 // #define PREHEAT_BEFORE_PROBING
 #if ENABLED(PREHEAT_BEFORE_PROBING)
-  #define PROBING_NOZZLE_TEMP 200   // (°C) Only applies to E0 at this time
-  #define PROBING_BED_TEMP     60
+  #define PROBING_NOZZLE_TEMP 120   // (°C) Only applies to E0 at this time
+  #define PROBING_BED_TEMP     50
 #endif
 
 // @section stepper drivers
@@ -1836,8 +1836,8 @@
 
 // @section homing
 
-#define NO_MOTION_BEFORE_HOMING // Inhibit movement until all axes have been homed. Also enable HOME_AFTER_DEACTIVATE for extra safety.
-#define HOME_AFTER_DEACTIVATE   // Require rehoming after steppers are deactivated. Also enable NO_MOTION_BEFORE_HOMING for extra safety.
+#define NO_MOTION_BEFORE_HOMING // Inhibit movement until all axes have been homed. Also enable HOME_AFTER_DEACTIVATE for extra safety. // AVS
+#define HOME_AFTER_DEACTIVATE   // Require rehoming after steppers are deactivated. Also enable NO_MOTION_BEFORE_HOMING for extra safety. // AVS
 
 /**
  * Set Z_IDLE_HEIGHT if the Z-Axis moves on its own when steppers are disabled.
@@ -1845,9 +1845,9 @@
  *  - Use a large value (i.e., Z_MAX_POS) if the bed falls down, away from the nozzle.
  */
 //#define Z_IDLE_HEIGHT Z_HOME_POS
-#define Z_IDLE_HEIGHT Z_MIN_POS
+#define Z_IDLE_HEIGHT Z_MIN_POS // AVS
 
-#define Z_CLEARANCE_FOR_HOMING  4   // (mm) Minimal Z height before homing (G28) for Z clearance above the bed, clamps, ...
+#define Z_CLEARANCE_FOR_HOMING  4   // (mm) Minimal Z height before homing (G28) for Z clearance above the bed, clamps, ... // AVS
                                       // You'll need this much clearance above Z_MAX_POS to avoid grinding.
 
 //#define Z_AFTER_HOMING         10   // (mm) Height to move to after homing (if Z was homed)
@@ -1885,7 +1885,7 @@
 // @section geometry
 
 // The size of the printable area
-#define X_BED_SIZE 225
+#define X_BED_SIZE 230
 #define Y_BED_SIZE 230
 
 // Travel limits (linear=mm, rotational=°) after homing, corresponding to endstop positions.
@@ -1894,7 +1894,7 @@
 #define Z_MIN_POS 0
 #define X_MAX_POS X_BED_SIZE
 #define Y_MAX_POS Y_BED_SIZE
-#define Z_MAX_POS 245
+#define Z_MAX_POS 250
 //#define I_MIN_POS 0
 //#define I_MAX_POS 50
 //#define J_MIN_POS 0
@@ -1946,7 +1946,7 @@
 #endif
 
 #if ANY(MIN_SOFTWARE_ENDSTOPS, MAX_SOFTWARE_ENDSTOPS)
-  #define SOFT_ENDSTOPS_MENU_ITEM  // Enable/Disable software endstops from the LCD
+  #define SOFT_ENDSTOPS_MENU_ITEM  // Enable/Disable software endstops from the LCD // AVS
 #endif
 
 /**
@@ -2107,7 +2107,7 @@
  */
 //#define AUTO_BED_LEVELING_3POINT
 //#define AUTO_BED_LEVELING_LINEAR
-#define AUTO_BED_LEVELING_BILINEAR
+#define AUTO_BED_LEVELING_BILINEAR // AVS
 //#define AUTO_BED_LEVELING_UBL
 //#define MESH_BED_LEVELING
 
@@ -2122,7 +2122,7 @@
  * these options to restore the prior leveling state or to always enable
  * leveling immediately after G28.
  */
-#define RESTORE_LEVELING_AFTER_G28
+#define RESTORE_LEVELING_AFTER_G28 // AVS
 //#define ENABLE_LEVELING_AFTER_G28
 
 /**
@@ -2130,8 +2130,8 @@
  */
 #define PREHEAT_BEFORE_LEVELING
 #if ENABLED(PREHEAT_BEFORE_LEVELING)
-  #define LEVELING_NOZZLE_TEMP 200   // (°C) Only applies to E0 at this time
-  #define LEVELING_BED_TEMP     60
+  #define LEVELING_NOZZLE_TEMP 200   // (°C) Only applies to E0 at this time // AVS
+  #define LEVELING_BED_TEMP     60   // AVS
 #endif
 
 /**
@@ -2285,7 +2285,7 @@
 #endif
 
 // Add a menu item to move between bed corners for manual bed adjustment
-#define LCD_BED_TRAMMING
+#define LCD_BED_TRAMMING // AVS
 
 #if ENABLED(LCD_BED_TRAMMING)
   #define BED_TRAMMING_INSET_LFRB { 30, 30, 30, 30 } // (mm) Left, Front, Right, Back insets
@@ -2343,7 +2343,7 @@
  * - Allows Z homing only when XY positions are known and trusted.
  * - If stepper drivers sleep, XY homing may be required again before Z homing.
  */
-#define Z_SAFE_HOMING
+#define Z_SAFE_HOMING // AVS
 
 #if ENABLED(Z_SAFE_HOMING)
   #define Z_SAFE_HOMING_X_POINT X_CENTER  // (mm) X point for Z homing
@@ -2352,7 +2352,7 @@
 #endif
 
 // Homing speeds (linear=mm/min, rotational=°/min)
-#define HOMING_FEEDRATE_MM_M { (150*60), (150*60), (10*60) }
+#define HOMING_FEEDRATE_MM_M { (150*60), (150*60), (8*60) } // AVS
 
 // Edit homing feedrates with M210 and MarlinUI menu items
 //#define EDITABLE_HOMING_FEEDRATE
@@ -2472,28 +2472,28 @@
 // Preheat Constants - Up to 10 are supported without changes
 //
 #define PREHEAT_1_LABEL       "PLA"
-#define PREHEAT_1_TEMP_HOTEND 200
-#define PREHEAT_1_TEMP_BED     60
+#define PREHEAT_1_TEMP_HOTEND 200 // AVS
+#define PREHEAT_1_TEMP_BED     60 // AVS
 #define PREHEAT_1_TEMP_CHAMBER 35
 #define PREHEAT_1_FAN_SPEED   255 // Value from 0 to 255
 
-#define PREHEAT_2_LABEL       "PETG"
-#define PREHEAT_2_TEMP_HOTEND 250
+#define PREHEAT_2_LABEL       "PETG" // AVS
+#define PREHEAT_2_TEMP_HOTEND 250 // AVS
 #define PREHEAT_2_TEMP_BED     70
 #define PREHEAT_2_TEMP_CHAMBER 35
 #define PREHEAT_2_FAN_SPEED   255 // Value from 0 to 255
 
-#define PREHEAT_3_LABEL       "TPU"
-#define PREHEAT_3_TEMP_HOTEND 230
-#define PREHEAT_3_TEMP_BED     70
-#define PREHEAT_3_TEMP_CHAMBER 35
-#define PREHEAT_3_FAN_SPEED    0//255 // Value from 0 to 255
+#define PREHEAT_3_LABEL       "TPU" // AVS
+#define PREHEAT_3_TEMP_HOTEND 230 // AVS
+#define PREHEAT_3_TEMP_BED     70 // AVS
+#define PREHEAT_3_TEMP_CHAMBER 35 // AVS
+#define PREHEAT_3_FAN_SPEED    0//255 // Value from 0 to 255 // AVS
 
-#define PREHEAT_4_LABEL       "ABS/ASA"
-#define PREHEAT_4_TEMP_HOTEND 270
-#define PREHEAT_4_TEMP_BED    100
-#define PREHEAT_4_TEMP_CHAMBER 35
-#define PREHEAT_4_FAN_SPEED    0//255 // Value from 0 to 255
+#define PREHEAT_4_LABEL       "ABS/ASA" // AVS
+#define PREHEAT_4_TEMP_HOTEND 270 // AVS
+#define PREHEAT_4_TEMP_BED    100 // AVS
+#define PREHEAT_4_TEMP_CHAMBER 35 // AVS
+#define PREHEAT_4_FAN_SPEED    0//255 // Value from 0 to 255 // AVS
 
 /**
  * @section nozzle park
@@ -2508,7 +2508,7 @@
  *    P1  Raise the nozzle always to Z-park height.
  *    P2  Raise the nozzle by Z-park amount, limited to Z_MAX_POS.
  */
-#define NOZZLE_PARK_FEATURE
+#define NOZZLE_PARK_FEATURE // AVS
 
 #if ENABLED(NOZZLE_PARK_FEATURE)
   // Specify a park position as { X, Y, Z_raise }
@@ -2737,7 +2737,7 @@
  *
  * :['JAPANESE', 'WESTERN', 'CYRILLIC']
  */
-#define DISPLAY_CHARSET_HD44780 CYRILLIC
+#define DISPLAY_CHARSET_HD44780 CYRILLIC // AVS
 
 /**
  * Info Screen Style (0:Classic, 1:Průša, 2:CNC)
