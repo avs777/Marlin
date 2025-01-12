@@ -153,3 +153,4 @@ Marlin is published under the [GPL license](/LICENSE) because we believe in open
 - `Ender-3-bugfix-2.1.x-20250106-172647` = ^ + input shaping, bed level speed
 - `Ender-3-bugfix-2.1.x-20250109-093000` = ^ + input shaping and speeds calibartion; temp PIDs; new extruder
 - `Ender-3-bugfix-2.1.x-20250110-120848` = ^ + retract at the end; stop z from falling
+- `Ender-3-bugfix-2.1.x-20250111-223350` = ^ + speed tweaks

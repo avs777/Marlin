@@ -1306,11 +1306,11 @@
  * Override with M203
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_FEEDRATE          { 500, 500, 20, 30 } // AVS
+#define DEFAULT_MAX_FEEDRATE          { 500, 500, 80, 46 } // AVS
 
 #define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
-  #define MAX_FEEDRATE_EDIT_VALUES    { 1000, 1000, 40, 60 } // ...or, set your own edit limits // AVS
+  #define MAX_FEEDRATE_EDIT_VALUES    { 1000, 1000, 160, 60 } // ...or, set your own edit limits // AVS
 #endif
 
 /**
@@ -1319,11 +1319,11 @@
  * Override with M201
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_ACCELERATION      { 1000, 1000, 200, 5000 } // AVS
+#define DEFAULT_MAX_ACCELERATION      { 2500, 2500, 250, 10000 } // AVS
 
 #define LIMITED_MAX_ACCEL_EDITING     // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
 #if ENABLED(LIMITED_MAX_ACCEL_EDITING)
-  #define MAX_ACCEL_EDIT_VALUES       { 2500, 2500, 400, 10000 } // ...or, set your own edit limits
+  #define MAX_ACCEL_EDIT_VALUES       { 2500, 2500, 500, 20000 } // ...or, set your own edit limits
 #endif
 
 /**
@@ -1334,8 +1334,8 @@
  *   M204 R    Retract Acceleration
  *   M204 T    Travel Acceleration
  */
-#define DEFAULT_ACCELERATION           1000    // X, Y, Z and E acceleration for printing moves // AVS
-#define DEFAULT_RETRACT_ACCELERATION   1000   // E acceleration for retracts
+#define DEFAULT_ACCELERATION           1000   // X, Y, Z and E acceleration for printing moves // AVS
+#define DEFAULT_RETRACT_ACCELERATION   2500   // E acceleration for retracts
 #define DEFAULT_TRAVEL_ACCELERATION    2500   // X, Y, Z acceleration for travel (non printing) moves // AVS
 
 /**
@@ -1350,8 +1350,8 @@
 #if ENABLED(CLASSIC_JERK)
   #define DEFAULT_XJERK  10.0
   #define DEFAULT_YJERK  10.0
-  #define DEFAULT_ZJERK  0.3
-  #define DEFAULT_EJERK  5.0
+  #define DEFAULT_ZJERK  0.6
+  #define DEFAULT_EJERK  8.0
   //#define DEFAULT_IJERK  0.3
   //#define DEFAULT_JJERK  0.3
   //#define DEFAULT_KJERK  0.3
