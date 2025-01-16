@@ -150,3 +150,4 @@ Marlin is published under the [GPL license](/LICENSE) because we believe in open
 ## Releases
 
 - `Ender-3-SKR-bugfix-2.1.x-20250113-220000` - AVS Custom Ender-3 SKR Mini V3 (CR Touch, Bed Leveling, Safe Z-Home, PT1000 thermistor, 300C hotend, BTT TFT Display)
+- `Ender-3-SKR-bugfix-2.1.x-20250115-182000` - ^ + speed and temp tweaks

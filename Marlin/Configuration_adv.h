@@ -1212,11 +1212,11 @@
 // #define INPUT_SHAPING_Z // AVS
 #if ANY(INPUT_SHAPING_X, INPUT_SHAPING_Y, INPUT_SHAPING_Z)
   #if ENABLED(INPUT_SHAPING_X)
-    #define SHAPING_FREQ_X  28.3        // (Hz) The default dominant resonant frequency on the X axis. // AVS
+    #define SHAPING_FREQ_X  28.64       // (Hz) The default dominant resonant frequency on the X axis. // AVS
     #define SHAPING_ZETA_X   0.15       // Damping ratio of the X axis (range: 0.0 = no damping to 1.0 = critical damping).
   #endif
   #if ENABLED(INPUT_SHAPING_Y)
-    #define SHAPING_FREQ_Y  35.7        // (Hz) The default dominant resonant frequency on the Y axis. // AVS
+    #define SHAPING_FREQ_Y  40.45       // (Hz) The default dominant resonant frequency on the Y axis. // AVS
     #define SHAPING_ZETA_Y   0.15       // Damping ratio of the Y axis (range: 0.0 = no damping to 1.0 = critical damping).
   #endif
   #if ENABLED(INPUT_SHAPING_Z)
@@ -1255,7 +1255,7 @@
 #define DEFAULT_STEPPER_TIMEOUT_SEC 120
 #define DISABLE_IDLE_X
 #define DISABLE_IDLE_Y
-// #define DISABLE_IDLE_Z    // Disable if the nozzle could fall onto your printed part! // AVS
+#define DISABLE_IDLE_Z    // Disable if the nozzle could fall onto your printed part!
 //#define DISABLE_IDLE_I
 //#define DISABLE_IDLE_J
 //#define DISABLE_IDLE_K
@@ -1753,7 +1753,7 @@
 
   #define MEDIA_MENU_AT_TOP               // Force the media menu to be listed on the top of the main menu // AVS
 
-  #define EVENT_GCODE_SD_ABORT "G92 E0\nG1 E-8 F300\nG28XY\nG1 Y230 F2000"  // G-code to run on SD Abort Print (e.g., "G28XY" or "G27") // AVS - retract a bit at the end
+  #define EVENT_GCODE_SD_ABORT "G92 E0\nG1 E-8 F300\nG28XY\nG1 Y230 F2000\nM84XYE"  // G-code to run on SD Abort Print (e.g., "G28XY" or "G27") // AVS - retract a bit at the end
 
   #if ENABLED(PRINTER_EVENT_LEDS)
     #define PE_LEDS_COMPLETED_TIME  (30*60) // (seconds) Time to keep the LED "done" color before restoring normal illumination

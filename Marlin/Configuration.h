@@ -709,9 +709,9 @@
     #define DEFAULT_Ki_LIST {   1.54,   1.54 }
     #define DEFAULT_Kd_LIST {  76.55,  76.55 }
   #else
-    #define DEFAULT_Kp  16.90 // AVS
-    #define DEFAULT_Ki   2.05 // AVS
-    #define DEFAULT_Kd  34.80 // AVS
+    #define DEFAULT_Kp  15.2258 // AVS
+    #define DEFAULT_Ki   1.9245 // AVS
+    #define DEFAULT_Kd  30.1148 // AVS
   #endif
 #else
   #define BANG_MAX 255    // Limit hotend current while in bang-bang mode; 255=full current
@@ -802,9 +802,9 @@
 
   // 120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   // from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
-  #define DEFAULT_bedKp 113.4 // AVS
-  #define DEFAULT_bedKi 21.48 // AVS
-  #define DEFAULT_bedKd 399.3 // AVS
+  #define DEFAULT_bedKp 106.9832 // AVS
+  #define DEFAULT_bedKi  20.9074 // AVS
+  #define DEFAULT_bedKd 364.9553 // AVS
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #else
@@ -1307,11 +1307,11 @@
  * Override with M203
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_FEEDRATE          { 500, 500, 80, 46 } // AVS
+#define DEFAULT_MAX_FEEDRATE          { 500, 500, 150, 300 } // AVS
 
 #define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
-  #define MAX_FEEDRATE_EDIT_VALUES    { 1000, 1000, 160, 60 } // ...or, set your own edit limits // AVS
+  #define MAX_FEEDRATE_EDIT_VALUES    { 1000, 1000, 300, 600 } // ...or, set your own edit limits // AVS
 #endif
 
 /**
@@ -1320,11 +1320,11 @@
  * Override with M201
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_ACCELERATION      { 2500, 2500, 250, 10000 } // AVS
+#define DEFAULT_MAX_ACCELERATION      { 2500, 2500, 300, 10000 } // AVS
 
 #define LIMITED_MAX_ACCEL_EDITING     // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
 #if ENABLED(LIMITED_MAX_ACCEL_EDITING)
-  #define MAX_ACCEL_EDIT_VALUES       { 2500, 2500, 500, 20000 } // ...or, set your own edit limits
+  #define MAX_ACCEL_EDIT_VALUES       { 8000, 8000, 1000, 20000 } // ...or, set your own edit limits
 #endif
 
 /**
@@ -1376,7 +1376,7 @@
  *   https://blog.kyneticcnc.com/2018/10/computing-junction-deviation-for-marlin.html
  */
 #if DISABLED(CLASSIC_JERK)
-  #define JUNCTION_DEVIATION_MM 0.013 // (mm) Distance from real junction edge
+  #define JUNCTION_DEVIATION_MM 0.036 // (mm) Distance from real junction edge // AVS
   #define JD_HANDLE_SMALL_SEGMENTS    // Use curvature estimation instead of just the junction angle
                                       // for small segments (< 1mm) with large junction angles (> 135°).
 #endif
@@ -1641,7 +1641,7 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-#define NOZZLE_TO_PROBE_OFFSET { -50, -5, 0 } // AVS
+#define NOZZLE_TO_PROBE_OFFSET { -50, -5, -0.3125 } // AVS
 
 // Enable and set to use a specific tool for probing. Disable to allow any tool.
 #define PROBING_TOOL 0
