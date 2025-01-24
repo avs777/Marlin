@@ -1,3 +1,28 @@
+
+## Changes to Marlin Firmware
+
+> [!CAUTION]
+> 
+> **Disclaimer**
+>
+> This fork is primarily for testing on my own printer and carries no warranties of any kind.
+> I'm not responsable of the damage or brick that may happen to your printer if you don't know what are you doing.
+
+> [!IMPORTANT]
+>
+> **This branch changes includes:**
+>
+>  - Configuration updates for my Ender-3 with BIGTREETECH SKR Mini E3 V3.0 board (CR Touch, Bed Leveling, Safe Z-Home, PT1000 thermistor, 300C hotend)
+>
+>
+
+## Releases
+
+- `Ender-3-SKR-bugfix-2.1.x-20250113-220000` - AVS Custom Ender-3 SKR Mini V3 (CR Touch, Bed Leveling, Safe Z-Home, PT1000 thermistor, 300C hotend)
+- `Ender-3-SKR-bugfix-2.1.x-20250115-182000` - ^ + speed and temp tweaks
+- `Ender-3-SKR-bugfix-2.1.x-20250123-232000` - ^ + sync with latest Marlin `bugfix-2.1.x` updates
+
+
 <p align="center"><img src="buildroot/share/pixmaps/logo/marlin-outrun-nf-500.png" height="250" alt="MarlinFirmware's logo" /></p>
 
 <h1 align="center">Marlin 3D Printer Firmware</h1>
@@ -146,8 +171,3 @@ Name|Role|Link|Donate
 ## License
 
 Marlin is published under the [GPL license](/LICENSE) because we believe in open development. The GPL comes with both rights and obligations. Whether you use Marlin firmware as the driver for your open or closed-source product, you must keep Marlin open, and you must provide your compatible Marlin source code to end users upon request. The most straightforward way to comply with the Marlin license is to make a fork of Marlin on Github, perform your modifications, and direct users to your modified fork.
-
-## Releases
-
-- `Ender-3-SKR-bugfix-2.1.x-20250113-220000` - AVS Custom Ender-3 SKR Mini V3 (CR Touch, Bed Leveling, Safe Z-Home, PT1000 thermistor, 300C hotend, BTT TFT Display)
-- `Ender-3-SKR-bugfix-2.1.x-20250115-182000` - ^ + speed and temp tweaks
