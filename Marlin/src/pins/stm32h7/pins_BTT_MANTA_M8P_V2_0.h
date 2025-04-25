@@ -36,9 +36,9 @@
   #ifndef FLASH_EEPROM_EMULATION
     #define FLASH_EEPROM_EMULATION                // Use Flash-based EEPROM emulation
   #endif
-  #define EEPROM_PAGE_SIZE      (0x800UL) // 2K
-  #define EEPROM_START_ADDRESS  (0x8000000UL + (STM32_FLASH_SIZE) * 1024UL - (EEPROM_PAGE_SIZE) * 2UL)
-  #define MARLIN_EEPROM_SIZE    EEPROM_PAGE_SIZE
+  #define EEPROM_PAGE_SIZE                0x800U  // 2K
+  #define EEPROM_START_ADDRESS (0x8000000UL + (STM32_FLASH_SIZE) * 1024UL - (EEPROM_PAGE_SIZE) * 2UL)
+  #define MARLIN_EEPROM_SIZE    EEPROM_PAGE_SIZE  // 2K
 #endif
 
 // Avoid conflict with TIMER_TONE
@@ -307,7 +307,6 @@
   //#define Y_HARDWARE_SERIAL  Serial1
   //#define Y2_HARDWARE_SERIAL Serial1
   //#define Z_HARDWARE_SERIAL  Serial1
-  //#define Z2_HARDWARE_SERIAL Serial1
   //#define E0_HARDWARE_SERIAL Serial1
   //#define E1_HARDWARE_SERIAL Serial1
   //#define E2_HARDWARE_SERIAL Serial1
@@ -317,11 +316,11 @@
   #define X_SERIAL_TX_PIN                   PC13
   #define Y_SERIAL_TX_PIN                   PE3
   #define Z_SERIAL_TX_PIN                   PB9
-  #define Z2_SERIAL_TX_PIN                  PB5
-  #define E0_SERIAL_TX_PIN                  PG14
-  #define E1_SERIAL_TX_PIN                  PG10
-  #define E2_SERIAL_TX_PIN                  PD5
-  #define E3_SERIAL_TX_PIN                  PC6
+  #define E0_SERIAL_TX_PIN                  PB5
+  #define E1_SERIAL_TX_PIN                  PG14
+  #define E2_SERIAL_TX_PIN                  PG10
+  #define E3_SERIAL_TX_PIN                  PD5
+  #define E4_SERIAL_TX_PIN                  PC6
 
   // Reduce baud rate to improve software serial reliability
   #ifndef TMC_BAUD_RATE

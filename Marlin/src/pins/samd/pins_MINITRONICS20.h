@@ -44,7 +44,7 @@
  */
 //#define FLASH_EEPROM_EMULATION
 //#define I2C_EEPROM                              // EEPROM on I2C-0
-#define MARLIN_EEPROM_SIZE                   500  // 4000 bytes
+#define MARLIN_EEPROM_SIZE                  500U  // 4000 bytes
 
 //This its another option to emulate an EEPROM, but its more efficient to dont loose the data the first One.
 //#define SDCARD_EEPROM_EMULATION
@@ -128,7 +128,7 @@
 #endif
 
 // Verify that drivers match the hardware
-#if (HAS_X_AXIS && !AXIS_DRIVER_TYPE_X(DRV8825)) || (HAS_Y_AXIS && !AXIS_DRIVER_TYPE_Y(DRV8825)) || (HAS_Z_AXIS && !AXIS_DRIVER_TYPE_Z(DRV8825)) || (HAS_EXTRUDER && !AXIS_DRIVER_TYPE_E0(DRV8825))
+#if (HAS_X_AXIS && !AXIS_DRIVER_TYPE_X(DRV8825)) || (HAS_Y_AXIS && !AXIS_DRIVER_TYPE_Y(DRV8825)) || (HAS_Z_AXIS && !AXIS_DRIVER_TYPE_Z(DRV8825)) || (HAS_EXTRUDERS && !AXIS_DRIVER_TYPE_E0(DRV8825))
   #error "Minitronics v2.0 has hard-wired DRV8825 drivers. Comment out this line to continue."
 #endif
 

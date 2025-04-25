@@ -34,7 +34,7 @@
 #endif
 
 #ifndef MARLIN_EEPROM_SIZE
-  #define MARLIN_EEPROM_SIZE              0x1000  // 4K
+  #define MARLIN_EEPROM_SIZE             0x1000U  // 4K
 #endif
 
 //
@@ -730,5 +730,5 @@
 #endif // HAS_WIRED_LCD
 
 #ifndef KILL_PIN
-  #define KILL_PIN                   EXP2_08_PIN
+  #define KILL_PIN                            11
 #endif
