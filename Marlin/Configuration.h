@@ -1389,7 +1389,7 @@
  *
  * See https://github.com/synthetos/TinyG/wiki/Jerk-Controlled-Motion-Explained
  */
-#define S_CURVE_ACCELERATION // AVS
+// #define S_CURVE_ACCELERATION // AVS - SMOOTH_LIN_ADVANCE is not compatible with S_CURVE_ACCELERATION.
 
 //===========================================================================
 //============================= Z Probe Options =============================
