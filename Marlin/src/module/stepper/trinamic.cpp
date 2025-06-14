@@ -32,23 +32,42 @@
 #include "trinamic.h"
 #include "../stepper.h"
 
-#include <HardwareSerial.h>
-#include <SPI.h>
-
 enum StealthIndex : uint8_t {
   LOGICAL_AXIS_LIST(STEALTH_AXIS_E, STEALTH_AXIS_X, STEALTH_AXIS_Y, STEALTH_AXIS_Z, STEALTH_AXIS_I, STEALTH_AXIS_J, STEALTH_AXIS_K, STEALTH_AXIS_U, STEALTH_AXIS_V, STEALTH_AXIS_W)
 };
 #define TMC_INIT(ST, STEALTH_INDEX) tmc_init(stepper##ST, ST##_CURRENT, ST##_MICROSTEPS, ST##_HYBRID_THRESHOLD, stealthchop_by_axis[STEALTH_INDEX], chopper_timing_##ST, ST##_INTERPOLATE, ST##_HOLD_MULTIPLIER)
 
+//
 //   IC = TMC model number
 //   ST = Stepper object letter
 //   L  = Label characters
 //   AI = Axis Enum Index
 // SWHW = SW/SH UART selection
+//
+
 #if ENABLED(TMC_USE_SW_SPI)
-  #define __TMC_SPI_DEFINE(IC, ST, L, AI) TMCMarlin<IC##Stepper, L, AI> stepper##ST(ST##_CS_PIN, float(ST##_RSENSE), TMC_SPI_MOSI, TMC_SPI_MISO, TMC_SPI_SCK, ST##_CHAIN_POS)
+  #define __TMC_SPI_RSENSE_DEFINE(IC, ST, L, LI, AI) TMCMarlin<IC##Stepper, L, LI, AI> stepper##ST(ST##_CS_PIN, float(ST##_RSENSE), TMC_SPI_MOSI, TMC_SPI_MISO, TMC_SPI_SCK, ST##_CHAIN_POS)
+  #define __TMC_SPI_DEFINE_TMC2240(IC, ST, L, LI, AI) TMCMarlin<IC##Stepper, L, LI, AI> stepper##ST(ST##_CS_PIN, TMC_SPI_MOSI, TMC_SPI_MISO, TMC_SPI_SCK, ST##_CHAIN_POS)
 #else
-  #define __TMC_SPI_DEFINE(IC, ST, L, AI) TMCMarlin<IC##Stepper, L, AI> stepper##ST(ST##_CS_PIN, float(ST##_RSENSE), ST##_CHAIN_POS)
+  #define __TMC_SPI_RSENSE_DEFINE(IC, ST, L, LI, AI) TMCMarlin<IC##Stepper, L, LI, AI> stepper##ST(ST##_CS_PIN, float(ST##_RSENSE), ST##_CHAIN_POS)
+  #define __TMC_SPI_DEFINE_TMC2240(IC, ST, L, LI, AI) TMCMarlin<IC##Stepper, L, LI, AI> stepper##ST(ST##_CS_PIN, ST##_CHAIN_POS)
+#endif
+#define __TMC_SPI_DEFINE_TMC2100 __TMC_SPI_RSENSE_DEFINE
+#define __TMC_SPI_DEFINE_TMC2130 __TMC_SPI_RSENSE_DEFINE
+#define __TMC_SPI_DEFINE_TMC2160 __TMC_SPI_RSENSE_DEFINE
+#define __TMC_SPI_DEFINE_TMC2208 __TMC_SPI_RSENSE_DEFINE
+#define __TMC_SPI_DEFINE_TMC2209 __TMC_SPI_RSENSE_DEFINE
+#define __TMC_SPI_DEFINE_TMC2660 __TMC_SPI_RSENSE_DEFINE
+#define __TMC_SPI_DEFINE_TMC5130 __TMC_SPI_RSENSE_DEFINE
+#define __TMC_SPI_DEFINE_TMC5160 __TMC_SPI_RSENSE_DEFINE
+
+#define __TMC_SPI_DEFINE(IC, ST, LandI, AI) __TMC_SPI_DEFINE_##IC(IC, ST, LandI, AI)
+#define _TMC_SPI_DEFINE(IC, ST, AI) __TMC_SPI_DEFINE(IC, ST, TMC_##ST##_LABEL, AI)
+#define TMC_SPI_DEFINE(ST, AI) _TMC_SPI_DEFINE(ST##_DRIVER_TYPE, ST, AI##_AXIS)
+#if ENABLED(DISTINCT_E_FACTORS)
+  #define TMC_SPI_DEFINE_E(AI) TMC_SPI_DEFINE(E##AI, E##AI)
+#else
+  #define TMC_SPI_DEFINE_E(AI) TMC_SPI_DEFINE(E##AI, E)
 #endif
 
 #if ENABLED(TMC_SERIAL_MULTIPLEXER)
@@ -59,17 +78,11 @@ enum StealthIndex : uint8_t {
 
 #define TMC_UART_SW_DEFINE(IC, ST, L, AI) TMCMarlin<IC##Stepper, L, AI> stepper##ST(ST##_SERIAL_RX_PIN, ST##_SERIAL_TX_PIN, float(ST##_RSENSE), ST##_SLAVE_ADDRESS)
 
-#define _TMC_SPI_DEFINE(IC, ST, AI) __TMC_SPI_DEFINE(IC, ST, TMC_##ST##_LABEL, AI)
-#define TMC_SPI_DEFINE(ST, AI) _TMC_SPI_DEFINE(ST##_DRIVER_TYPE, ST, AI##_AXIS)
-
 #define _TMC_UART_DEFINE(SWHW, IC, ST, AI) TMC_UART_##SWHW##_DEFINE(IC, ST, TMC_##ST##_LABEL, AI)
 #define TMC_UART_DEFINE(SWHW, ST, AI) _TMC_UART_DEFINE(SWHW, ST##_DRIVER_TYPE, ST, AI##_AXIS)
-
 #if ENABLED(DISTINCT_E_FACTORS)
-  #define TMC_SPI_DEFINE_E(AI) TMC_SPI_DEFINE(E##AI, E##AI)
   #define TMC_UART_DEFINE_E(SWHW, AI) TMC_UART_DEFINE(SWHW, E##AI, E##AI)
 #else
-  #define TMC_SPI_DEFINE_E(AI) TMC_SPI_DEFINE(E##AI, E)
   #define TMC_UART_DEFINE_E(SWHW, AI) TMC_UART_DEFINE(SWHW, E##AI, E)
 #endif
 
@@ -219,16 +232,19 @@ enum StealthIndex : uint8_t {
 
 #if HAS_DRIVER(TMC2130)
   template<char AXIS_LETTER, char DRIVER_ID, AxisEnum AXIS_ID>
-  void tmc_init(TMCMarlin<TMC2130Stepper, AXIS_LETTER, DRIVER_ID, AXIS_ID> &st, const uint16_t mA, const uint16_t microsteps, const uint32_t hyb_thrs, const bool stealth, const chopper_timing_t &chop_init, const bool interpolate, float hold_multiplier) {
+  void tmc_init(TMCMarlin<TMC2130Stepper, AXIS_LETTER, DRIVER_ID, AXIS_ID> &st,
+    const uint16_t mA, const uint16_t microsteps, const uint32_t hyb_thrs, const bool stealth,
+    const chopper_timing_t &chop_init, const bool interpolate, float hold_multiplier
+  ) {
     st.begin();
 
     CHOPCONF_t chopconf{0};
-    chopconf.tbl = 0b01;
-    chopconf.toff = chop_init.toff;
+    chopconf.tbl    = 0b01;
+    chopconf.toff   = chop_init.toff;
     chopconf.intpol = interpolate;
-    chopconf.hend = chop_init.hend + 3;
-    chopconf.hstrt = chop_init.hstrt - 1;
-    TERN_(EDGE_STEPPING, chopconf.dedge = true);
+    chopconf.hend   = chop_init.hend + 3;
+    chopconf.hstrt  = chop_init.hstrt - 1;
+    chopconf.dedge  = ENABLED(EDGE_STEPPING);
     st.CHOPCONF(chopconf.sr);
 
     st.rms_current(mA, hold_multiplier);
@@ -254,16 +270,19 @@ enum StealthIndex : uint8_t {
 
 #if HAS_DRIVER(TMC2160)
   template<char AXIS_LETTER, char DRIVER_ID, AxisEnum AXIS_ID>
-  void tmc_init(TMCMarlin<TMC2160Stepper, AXIS_LETTER, DRIVER_ID, AXIS_ID> &st, const uint16_t mA, const uint16_t microsteps, const uint32_t hyb_thrs, const bool stealth, const chopper_timing_t &chop_init, const bool interpolate, float hold_multiplier) {
+  void tmc_init(TMCMarlin<TMC2160Stepper, AXIS_LETTER, DRIVER_ID, AXIS_ID> &st,
+    const uint16_t mA, const uint16_t microsteps, const uint32_t hyb_thrs, const bool stealth,
+    const chopper_timing_t &chop_init, const bool interpolate, float hold_multiplier
+  ) {
     st.begin();
 
     CHOPCONF_t chopconf{0};
-    chopconf.tbl = 0b01;
-    chopconf.toff = chop_init.toff;
+    chopconf.tbl    = 0b01;
+    chopconf.toff   = chop_init.toff;
     chopconf.intpol = interpolate;
-    chopconf.hend = chop_init.hend + 3;
-    chopconf.hstrt = chop_init.hstrt - 1;
-    TERN_(EDGE_STEPPING, chopconf.dedge = true);
+    chopconf.hend   = chop_init.hend + 3;
+    chopconf.hstrt  = chop_init.hstrt - 1;
+    chopconf.dedge  = ENABLED(EDGE_STEPPING);
     st.CHOPCONF(chopconf.sr);
 
     st.rms_current(mA, hold_multiplier);
@@ -670,7 +689,10 @@ enum StealthIndex : uint8_t {
 
 #if HAS_DRIVER(TMC2208)
   template<char AXIS_LETTER, char DRIVER_ID, AxisEnum AXIS_ID>
-  void tmc_init(TMCMarlin<TMC2208Stepper, AXIS_LETTER, DRIVER_ID, AXIS_ID> &st, const uint16_t mA, const uint16_t microsteps, const uint32_t hyb_thrs, const bool stealth, const chopper_timing_t &chop_init, const bool interpolate, float hold_multiplier) {
+  void tmc_init(TMCMarlin<TMC2208Stepper, AXIS_LETTER, DRIVER_ID, AXIS_ID> &st,
+    const uint16_t mA, const uint16_t microsteps, const uint32_t hyb_thrs, const bool stealth,
+    const chopper_timing_t &chop_init, const bool interpolate, float hold_multiplier
+  ) {
     TMC2208_n::GCONF_t gconf{0};
     gconf.pdn_disable = true; // Use UART
     gconf.mstep_reg_select = true; // Select microsteps with UART
@@ -680,12 +702,12 @@ enum StealthIndex : uint8_t {
     st.stored.stealthChop_enabled = stealth;
 
     TMC2208_n::CHOPCONF_t chopconf{0};
-    chopconf.tbl = 0b01; // blank_time = 24
-    chopconf.toff = chop_init.toff;
+    chopconf.tbl    = 0b01; // blank_time = 24
+    chopconf.toff   = chop_init.toff;
     chopconf.intpol = interpolate;
-    chopconf.hend = chop_init.hend + 3;
-    chopconf.hstrt = chop_init.hstrt - 1;
-    TERN_(EDGE_STEPPING, chopconf.dedge = true);
+    chopconf.hend   = chop_init.hend + 3;
+    chopconf.hstrt  = chop_init.hstrt - 1;
+    chopconf.dedge  = ENABLED(EDGE_STEPPING);
     st.CHOPCONF(chopconf.sr);
 
     st.rms_current(mA, hold_multiplier);
@@ -712,7 +734,10 @@ enum StealthIndex : uint8_t {
 
 #if HAS_DRIVER(TMC2209)
   template<char AXIS_LETTER, char DRIVER_ID, AxisEnum AXIS_ID>
-  void tmc_init(TMCMarlin<TMC2209Stepper, AXIS_LETTER, DRIVER_ID, AXIS_ID> &st, const uint16_t mA, const uint16_t microsteps, const uint32_t hyb_thrs, const bool stealth, const chopper_timing_t &chop_init, const bool interpolate, float hold_multiplier) {
+  void tmc_init(TMCMarlin<TMC2209Stepper, AXIS_LETTER, DRIVER_ID, AXIS_ID> &st,
+    const uint16_t mA, const uint16_t microsteps, const uint32_t hyb_thrs, const bool stealth,
+    const chopper_timing_t &chop_init, const bool interpolate, float hold_multiplier
+  ) {
     TMC2208_n::GCONF_t gconf{0};
     gconf.pdn_disable = true; // Use UART
     gconf.mstep_reg_select = true; // Select microsteps with UART
@@ -722,12 +747,12 @@ enum StealthIndex : uint8_t {
     st.stored.stealthChop_enabled = stealth;
 
     TMC2208_n::CHOPCONF_t chopconf{0};
-    chopconf.tbl = 0b01; // blank_time = 24
-    chopconf.toff = chop_init.toff;
+    chopconf.tbl    = 0b01; // blank_time = 24
+    chopconf.toff   = chop_init.toff;
     chopconf.intpol = interpolate;
-    chopconf.hend = chop_init.hend + 3;
-    chopconf.hstrt = chop_init.hstrt - 1;
-    TERN_(EDGE_STEPPING, chopconf.dedge = true);
+    chopconf.hend   = chop_init.hend + 3;
+    chopconf.hstrt  = chop_init.hstrt - 1;
+    chopconf.dedge  = ENABLED(EDGE_STEPPING);
     st.CHOPCONF(chopconf.sr);
 
     st.rms_current(mA, hold_multiplier);
@@ -752,9 +777,84 @@ enum StealthIndex : uint8_t {
   }
 #endif // TMC2209
 
+#if HAS_DRIVER(TMC2240)
+  template<char AXIS_LETTER, char DRIVER_ID, AxisEnum AXIS_ID>
+  void tmc_init(TMCMarlin<TMC2240Stepper, AXIS_LETTER, DRIVER_ID, AXIS_ID> &st,
+    const uint16_t mA, const uint16_t microsteps, const uint32_t hyb_thrs, const bool stealth,
+    const chopper_timing_t &chop_init, const bool interpolate, float hold_multiplier
+  ) {
+    st.begin();
+
+    st.Rref = TMC2240_RREF; // Minimum: 12000 ; FLY TMC2240: 12300
+
+    TMC2240_n::GCONF_t gconf{0};
+    gconf.en_pwm_mode = !stealth;
+    st.GCONF(gconf.sr);
+
+    TMC2240_n::DRV_CONF_t drv_conf{0};
+    drv_conf.current_range = TMC2240_CURRENT_RANGE;
+    drv_conf.slope_control = TMC2240_SLOPE_CONTROL;
+    st.DRV_CONF(drv_conf.sr);
+
+    // Adjust based on user experience
+    TMC2240_n::CHOPCONF_t chopconf{0};
+    chopconf.toff   = chop_init.toff;       // 3 (3)
+    chopconf.intpol = interpolate;          // true
+    chopconf.hend   = chop_init.hend + 3;   // 2 (-1)
+    chopconf.hstrt  = chop_init.hstrt - 1;  // 5 (6)
+    chopconf.TBL    = 0b10;                 // 36 tCLK
+    chopconf.tpfd   = 4;                    // 512 NCLK
+    chopconf.dedge  = ENABLED(EDGE_STEPPING);
+    st.CHOPCONF(chopconf.sr);
+
+    st.rms_current(mA, hold_multiplier);
+    st.microsteps(microsteps);
+    st.iholddelay(6);
+    st.irundelay(4);
+
+    // (from Makerbase)
+    //st.TPOWERDOWN(10);
+
+    st.TPOWERDOWN(128); // ~2s until driver lowers to hold current
+
+    st.en_pwm_mode(stealth);
+    st.stored.stealthChop_enabled = stealth;
+
+    // Adjust based on user experience
+    TMC2240_n::PWMCONF_t pwmconf{0};
+    pwmconf.pwm_ofs             = 29;
+    pwmconf.pwm_grad            = 0;
+    pwmconf.pwm_freq            = 0b00;  // fPWM = 2/1024 fCLK | 16MHz clock -> 31.3kHz PWM
+    pwmconf.pwm_autograd        = true;
+    pwmconf.pwm_autoscale       = true;
+    pwmconf.freewheel           = 0;
+    pwmconf.pwm_meas_sd_enable  = false;
+    pwmconf.pwm_dis_reg_stst    = false;
+    pwmconf.pwm_reg             = 4;
+    pwmconf.pwm_lim             = 12;
+    st.PWMCONF(pwmconf.sr);
+
+    TERN(HYBRID_THRESHOLD, st.set_pwm_thrs(hyb_thrs), UNUSED(hyb_thrs));
+
+    // (from Makerbase)
+    //st.GCONF(0x00);
+    //st.IHOLD_IRUN(0x04071f03);
+    //st.GSTAT(0x07);
+    //st.GSTAT(0x00);
+
+    st.diag0_pushpull(true);
+
+    st.GSTAT(); // Clear GSTAT
+  }
+
+#endif // TMC2240
+
 #if HAS_DRIVER(TMC2660)
   template<char AXIS_LETTER, char DRIVER_ID, AxisEnum AXIS_ID>
-  void tmc_init(TMCMarlin<TMC2660Stepper, AXIS_LETTER, DRIVER_ID, AXIS_ID> &st, const uint16_t mA, const uint16_t microsteps, const uint32_t, const bool, const chopper_timing_t &chop_init, const bool interpolate, float hold_multiplier) {
+  void tmc_init(TMCMarlin<TMC2660Stepper, AXIS_LETTER, DRIVER_ID, AXIS_ID> &st,
+    const uint16_t mA, const uint16_t microsteps, const uint32_t, const bool,
+    const chopper_timing_t &chop_init, const bool interpolate, float hold_multiplier
+  ) {
     st.begin();
 
     TMC2660_n::CHOPCONF_t chopconf{0};
@@ -776,16 +876,19 @@ enum StealthIndex : uint8_t {
 
 #if HAS_DRIVER(TMC5130)
   template<char AXIS_LETTER, char DRIVER_ID, AxisEnum AXIS_ID>
-  void tmc_init(TMCMarlin<TMC5130Stepper, AXIS_LETTER, DRIVER_ID, AXIS_ID> &st, const uint16_t mA, const uint16_t microsteps, const uint32_t hyb_thrs, const bool stealth, const chopper_timing_t &chop_init, const bool interpolate, float hold_multiplier) {
+  void tmc_init(TMCMarlin<TMC5130Stepper, AXIS_LETTER, DRIVER_ID, AXIS_ID> &st,
+    const uint16_t mA, const uint16_t microsteps, const uint32_t hyb_thrs, const bool stealth,
+    const chopper_timing_t &chop_init, const bool interpolate, float hold_multiplier
+  ) {
     st.begin();
 
     CHOPCONF_t chopconf{0};
-    chopconf.tbl = 0b01;
-    chopconf.toff = chop_init.toff;
+    chopconf.tbl    = 0b01;
+    chopconf.toff   = chop_init.toff;
     chopconf.intpol = interpolate;
-    chopconf.hend = chop_init.hend + 3;
-    chopconf.hstrt = chop_init.hstrt - 1;
-    TERN_(EDGE_STEPPING, chopconf.dedge = true);
+    chopconf.hend   = chop_init.hend + 3;
+    chopconf.hstrt  = chop_init.hstrt - 1;
+    chopconf.dedge  = ENABLED(EDGE_STEPPING);
     st.CHOPCONF(chopconf.sr);
 
     st.rms_current(mA, hold_multiplier);
@@ -811,16 +914,19 @@ enum StealthIndex : uint8_t {
 
 #if HAS_DRIVER(TMC5160)
   template<char AXIS_LETTER, char DRIVER_ID, AxisEnum AXIS_ID>
-  void tmc_init(TMCMarlin<TMC5160Stepper, AXIS_LETTER, DRIVER_ID, AXIS_ID> &st, const uint16_t mA, const uint16_t microsteps, const uint32_t hyb_thrs, const bool stealth, const chopper_timing_t &chop_init, const bool interpolate, float hold_multiplier) {
+  void tmc_init(TMCMarlin<TMC5160Stepper, AXIS_LETTER, DRIVER_ID, AXIS_ID> &st,
+    const uint16_t mA, const uint16_t microsteps, const uint32_t hyb_thrs, const bool stealth,
+    const chopper_timing_t &chop_init, const bool interpolate, float hold_multiplier
+  ) {
     st.begin();
 
     CHOPCONF_t chopconf{0};
-    chopconf.tbl = 0b01;
-    chopconf.toff = chop_init.toff;
+    chopconf.tbl    = 0b01;
+    chopconf.toff   = chop_init.toff;
     chopconf.intpol = interpolate;
-    chopconf.hend = chop_init.hend + 3;
-    chopconf.hstrt = chop_init.hstrt - 1;
-    TERN_(EDGE_STEPPING, chopconf.dedge = true);
+    chopconf.hend   = chop_init.hend + 3;
+    chopconf.hstrt  = chop_init.hstrt - 1;
+    chopconf.dedge  = ENABLED(EDGE_STEPPING);
     st.CHOPCONF(chopconf.sr);
 
     st.rms_current(mA, hold_multiplier);
@@ -842,6 +948,7 @@ enum StealthIndex : uint8_t {
     st.PWMCONF(pwmconf.sr);
 
     TERN(HYBRID_THRESHOLD, st.set_pwm_thrs(hyb_thrs), UNUSED(hyb_thrs));
+
     st.GSTAT(); // Clear GSTAT
   }
 #endif // TMC5160
