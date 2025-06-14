@@ -22,6 +22,7 @@
 - `Ender-3-SKR-bugfix-2.1.x-20250115-182000` - ^ + speed and temp tweaks
 - `Ender-3-SKR-bugfix-2.1.x-20250123-232000` - ^ + sync with latest Marlin `bugfix-2.1.x` updates
 - `Ender-3-SKR-bugfix-2.1.x-20250425-145000` - ^ + sync with latest Marlin `bugfix-2.1.x` updates, SMOOTH_LIN_ADVANCE
+- `Ender-3-SKR-bugfix-2.1.x-20250614-113000` - ^ + sync with latest Marlin `bugfix-2.1.x` updates
 
 
 <p align="center"><img src="buildroot/share/pixmaps/logo/marlin-outrun-nf-500.png" height="250" alt="MarlinFirmware's logo" /></p>
