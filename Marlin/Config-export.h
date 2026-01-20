@@ -2,7 +2,7 @@
  * Config.h - Marlin Firmware distilled configuration
  * Usage: Place this file in the 'Marlin' folder with the name 'Config.h'.
  *
- * Exported by Marlin build on 2026-01-06 at 14:43:35.
+ * Exported by Marlin build on 2026-01-20 at 06:19:46.
  */
 
 //
@@ -42,8 +42,13 @@
 #define INVERT_E0_DIR                            false
 #define DEFAULT_NOMINAL_FILAMENT_DIA             1.75
 #define ENABLE_AUTO_OFF_DISPLAY
+#define DWIN_DIMM_MENU
+#define SMOOTH_LIN_ADV_HZ                        1000
+#define INPUT_SHAPING_E_SYNC
 #define LIN_ADVANCE
-#define ADVANCE_K                                0.0
+#define ADVANCE_TAU                              0.02
+#define SMOOTH_LIN_ADVANCE
+#define ADVANCE_K                                0.13
 
 //
 // Geometry
@@ -81,6 +86,7 @@
 #define Z_SAFE_HOMING_Y_POINT                    Y_CENTER
 #define Z_CLEARANCE_FOR_HOMING                   10
 #define Z_SAFE_HOMING
+#define DWIN_ZHOME_MENU
 
 //
 // Kinematics
@@ -141,6 +147,7 @@
 #define INPUT_SHAPING_Y
 #define SHAPING_FREQ_X                           42.0
 #define SHAPING_FREQ_Y                           40.0
+#define DWIN_INPUT_SHAPING_MENU
 
 //
 // Endstops
@@ -228,12 +235,25 @@
 #define WATCH_BED_TEMP_PERIOD                    180
 #define WATCH_TEMP_INCREASE                      2
 #define WATCH_TEMP_PERIOD                        40
+#define DWIN_CUSTOM_EXTRUDE
 #define FLOW_MINVAL                              10
+#define PREHEAT_3_LABEL                          "PETG"
+#define PREHEAT_3_TEMP_CHAMBER                   35
 #define FLOW_MAXVAL                              200
+#define PREHEAT_4_FAN_SPEED                      0
+#define EXTRA_PREHEAT_LABELS
+#define PREHEAT_4_TEMP_CHAMBER                   35
+#define PREHEAT_4_LABEL                          "ABS"
+#define PREHEAT_4_TEMP_BED                       110
+#define PREHEAT_3_FAN_SPEED                      0
+#define PREHEAT_4_TEMP_HOTEND                    260
+#define PREHEAT_3_TEMP_BED                       90
 #define PREHEAT_2_LABEL                          "TPU"
+#define PREHEAT_3_TEMP_HOTEND                    240
 #define PREHEAT_2_TEMP_BED                       70
 #define PREHEAT_2_FAN_SPEED                      0
 #define BED_MINTEMP                              0
+#define PREHEAT_ALERT
 #define PREHEAT_2_TEMP_HOTEND                    230
 #define BED_MAXTEMP                              125
 #define AUTOTEMP_FACTOR                          0.1f

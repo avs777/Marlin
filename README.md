@@ -10,6 +10,9 @@
   <img src="https://img.shields.io/badge/Profile-Custom%20Tuned-success?style=for-the-badge" alt="Custom tuned profile">
 </p>
 
+AVS: My tweaks
+- Ender-3-V3-SE-bugfix-2.1.x-20260119-222252.bin - Linear Advance and DWIN menus
+
 This version of Firmware uses the Marlin Bugfix 2.1.x Branch to bring all the goodies of the updated version into the Ender 3 V3 SE.
 
 I have ported many of the features and fixes from the community stock version in the old repo: https://github.com/navaismo/Ender-3V3-SE. It may look we have the same but at the core is different.
