@@ -12,6 +12,7 @@
 
 AVS: My tweaks
 - Ender-3-V3-SE-bugfix-2.1.x-20260119-222252.bin - Linear Advance and DWIN menus
+- Ender-3-V3-SE-bugfix-2.1.x-20260119-222252.bin - default PIDs and acceleration
 
 This version of Firmware uses the Marlin Bugfix 2.1.x Branch to bring all the goodies of the updated version into the Ender 3 V3 SE.
 

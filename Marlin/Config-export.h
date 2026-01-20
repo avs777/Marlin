@@ -2,7 +2,7 @@
  * Config.h - Marlin Firmware distilled configuration
  * Usage: Place this file in the 'Marlin' folder with the name 'Config.h'.
  *
- * Exported by Marlin build on 2026-01-20 at 06:47:42.
+ * Exported by Marlin build on 2026-01-20 at 23:41:31.
  */
 
 //
@@ -102,7 +102,7 @@
 #define DEFAULT_AXIS_STEPS_PER_UNIT              { 80, 80, 400, 715.12 }
 #define AXIS_RELATIVE_MODES                      { false, false, false, false }
 #define DEFAULT_MAX_FEEDRATE                     { 500, 500, 20, 30 }
-#define DEFAULT_MAX_ACCELERATION                 { 5000, 5000, 5000, 5000 }
+#define DEFAULT_MAX_ACCELERATION                 { 5000, 5000, 300, 5000 }
 #define INVERT_X_DIR                             true
 #define INVERT_Y_DIR                             false
 #define INVERT_Z_DIR                             true
@@ -267,9 +267,9 @@
 #define PIDTEMP
 #define PID_K1                                   0.95
 #define PID_MAX                                  255
-#define DEFAULT_Kd                               26.68
-#define DEFAULT_Ki                               3.93
-#define DEFAULT_Kp                               20.49
+#define DEFAULT_Kd                               30.82
+#define DEFAULT_Ki                               3.92
+#define DEFAULT_Kp                               22.01
 
 //
 // PID Temp
@@ -280,10 +280,10 @@
 // Bed Temp
 //
 #define MAX_BED_POWER                            255
-#define DEFAULT_bedKi                            14.29
+#define DEFAULT_bedKi                            16.51
 #define PIDTEMPBED
-#define DEFAULT_bedKp                            123.71
-#define DEFAULT_bedKd                            713.77
+#define DEFAULT_bedKp                            155.86
+#define DEFAULT_bedKd                            980.91
 
 //
 // Fans
