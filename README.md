@@ -25,6 +25,7 @@
 - `Ender-3-SKR-bugfix-2.1.x-20250614-113000` - ^ + sync with latest Marlin `bugfix-2.1.x` updates
 - `Ender-3-SKR-bugfix-2.1.x-20260119-114000` - ^ + sync with latest Marlin `bugfix-2.1.x` updates
 - `Ender-3-SKR-bugfix-2.1.x-20260119-124000` - ^ + enable S_CURVE_ACCELERATION, 4th order, S_CURVE_FACTOR 0.25
+- `Ender-3-SKR-bugfix-2.1.x-20260120-095000` - ^ + K calibration
 
 
 <p align="center"><img src="buildroot/share/pixmaps/logo/marlin-outrun-nf-500.png" height="250" alt="MarlinFirmware's logo" /></p>
