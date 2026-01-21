@@ -2,7 +2,7 @@
  * Config.h - Marlin Firmware distilled configuration
  * Usage: Place this file in the 'Marlin' folder with the name 'Config.h'.
  *
- * Exported by Marlin build on 2026-01-20 at 23:41:31.
+ * Exported by Marlin build on 2026-01-21 at 05:51:00.
  */
 
 //
@@ -43,11 +43,7 @@
 #define DEFAULT_NOMINAL_FILAMENT_DIA             1.75
 #define ENABLE_AUTO_OFF_DISPLAY
 #define DWIN_DIMM_MENU
-#define SMOOTH_LIN_ADV_HZ                        1000
-#define INPUT_SHAPING_E_SYNC
 #define LIN_ADVANCE
-#define ADVANCE_TAU                              0.02
-#define SMOOTH_LIN_ADVANCE
 #define ADVANCE_K                                0.13
 
 //
