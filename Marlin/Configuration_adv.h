@@ -2448,7 +2448,7 @@
   #if ENABLED(DISTINCT_E_FACTORS)
     #define ADVANCE_K { 0.22 }    // (mm) Compression length per 1mm/s extruder speed, per extruder. Override with 'M900 T<tool> K<mm>'.
   #else
-    #define ADVANCE_K 0.05        // (mm) Compression length for all extruders. Override with 'M900 K<mm>'.   // AVS
+    #define ADVANCE_K 0.00        // (mm) Compression length for all extruders. Override with 'M900 K<mm>'.   // AVS - handle K in g-code
   #endif
   //#define ADVANCE_K_EXTRA       // Add a second linear advance constant, configurable with 'M900 L'.
 #endif
