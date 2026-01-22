@@ -2,7 +2,7 @@
  * Config.h - Marlin Firmware distilled configuration
  * Usage: Place this file in the 'Marlin' folder with the name 'Config.h'.
  *
- * Exported by Marlin build on 2026-01-22 at 06:17:24.
+ * Exported by Marlin build on 2026-01-22 at 07:14:48.
  */
 
 //
@@ -45,8 +45,9 @@
 #define EXTRUDERS                                1
 #define DEFAULT_NOMINAL_FILAMENT_DIA             1.75
 #define ENABLE_AUTO_OFF_DISPLAY
+#define DWIN_DIMM_MENU
 #define LIN_ADVANCE
-#define ADVANCE_K                                0.0
+#define ADVANCE_K                                0.00
 
 //
 // Geometry
@@ -84,6 +85,7 @@
 #define Z_SAFE_HOMING_Y_POINT                    Y_CENTER
 #define Z_CLEARANCE_FOR_HOMING                   10
 #define Z_SAFE_HOMING
+#define DWIN_ZHOME_MENU
 
 //
 // Kinematics
@@ -99,7 +101,7 @@
 #define DEFAULT_AXIS_STEPS_PER_UNIT              { 80, 80, 400, 715.12 }
 #define AXIS_RELATIVE_MODES                      { false, false, false, false }
 #define DEFAULT_MAX_FEEDRATE                     { 500, 500, 20, 30 }
-#define DEFAULT_MAX_ACCELERATION                 { 5000, 5000, 5000, 5000 }
+#define DEFAULT_MAX_ACCELERATION                 { 5000, 5000, 300, 5000 }
 #define STEP_STATE_E                             HIGH
 #define STEP_STATE_X                             HIGH
 #define STEP_STATE_Y                             HIGH
@@ -127,6 +129,7 @@
 #define N_ARC_CORRECTION                         25
 #define SLOWDOWN
 #define SLOWDOWN_DIVISOR                         2
+#define S_CURVE_FACTOR                           0.25
 #define MAX_FEEDRATE_EDIT_VALUES                 { 1000, 1000, 40, 60 }
 #define MAX_ACCEL_EDIT_VALUES                    { 8000, 8000, 8000, 8000 }
 #define S_CURVE_ACCELERATION
@@ -146,6 +149,7 @@
 #define INPUT_SHAPING_Y
 #define SHAPING_FREQ_X                           42.0
 #define SHAPING_FREQ_Y                           40.0
+#define DWIN_INPUT_SHAPING_MENU
 
 //
 // Endstops
@@ -236,9 +240,9 @@
 #define PIDTEMP
 #define PID_K1                                   0.95
 #define PID_MAX                                  255
-#define DEFAULT_KP                               20.49
-#define DEFAULT_KI                               3.93
-#define DEFAULT_KD                               26.68
+#define DEFAULT_KP                               22.01
+#define DEFAULT_KI                               3.92
+#define DEFAULT_KD                               30.82
 
 //
 // PID Temp
@@ -249,10 +253,10 @@
 // Bed Temp
 //
 #define MAX_BED_POWER                            255
-#define DEFAULT_BED_KI                           14.29
+#define DEFAULT_BED_KI                           16.51
 #define PIDTEMPBED
-#define DEFAULT_BED_KD                           713.77
-#define DEFAULT_BED_KP                           123.71
+#define DEFAULT_BED_KD                           980.91
+#define DEFAULT_BED_KP                           155.86
 
 //
 // Fans
@@ -459,9 +463,22 @@
 #define PREHEAT_1_FAN_SPEED                      0
 #define PREHEAT_1_LABEL                          "PLA"
 #define PREHEAT_1_TEMP_BED                       60
+#define DWIN_CUSTOM_EXTRUDE
+#define PREHEAT_3_LABEL                          "PETG"
+#define PREHEAT_3_TEMP_CHAMBER                   35
+#define PREHEAT_4_FAN_SPEED                      0
+#define EXTRA_PREHEAT_LABELS
+#define PREHEAT_4_TEMP_CHAMBER                   35
+#define PREHEAT_4_LABEL                          "ABS"
+#define PREHEAT_4_TEMP_BED                       110
+#define PREHEAT_3_FAN_SPEED                      0
+#define PREHEAT_4_TEMP_HOTEND                    260
+#define PREHEAT_3_TEMP_BED                       90
 #define PREHEAT_2_LABEL                          "TPU"
+#define PREHEAT_3_TEMP_HOTEND                    240
 #define PREHEAT_2_TEMP_BED                       70
 #define PREHEAT_2_FAN_SPEED                      0
+#define PREHEAT_ALERT
 #define PREHEAT_2_TEMP_HOTEND                    230
 
 //
