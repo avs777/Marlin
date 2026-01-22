@@ -2,7 +2,7 @@
  * Config.h - Marlin Firmware distilled configuration
  * Usage: Place this file in the 'Marlin' folder with the name 'Config.h'.
  *
- * Exported by Marlin build on 2026-01-22 at 03:05:47.
+ * Exported by Marlin build on 2026-01-22 at 06:17:24.
  */
 
 //
@@ -34,12 +34,15 @@
 #define Y_ENABLE_ON                              LOW
 #define Z_ENABLE_ON                              LOW
 #define E_ENABLE_ON                              LOW
+#define INVERT_X_DIR                             true
+#define INVERT_Y_DIR                             false
+#define INVERT_Z_DIR                             true
+#define INVERT_E0_DIR                            false
 
 //
 // Extruder
 //
 #define EXTRUDERS                                1
-#define INVERT_E0_DIR                            false
 #define DEFAULT_NOMINAL_FILAMENT_DIA             1.75
 #define ENABLE_AUTO_OFF_DISPLAY
 #define LIN_ADVANCE
@@ -97,9 +100,6 @@
 #define AXIS_RELATIVE_MODES                      { false, false, false, false }
 #define DEFAULT_MAX_FEEDRATE                     { 500, 500, 20, 30 }
 #define DEFAULT_MAX_ACCELERATION                 { 5000, 5000, 5000, 5000 }
-#define INVERT_X_DIR                             true
-#define INVERT_Y_DIR                             false
-#define INVERT_Z_DIR                             true
 #define STEP_STATE_E                             HIGH
 #define STEP_STATE_X                             HIGH
 #define STEP_STATE_Y                             HIGH
@@ -115,11 +115,16 @@
 #define DEFAULT_MINSEGMENTTIME                   20000
 #define DEFAULT_EJERK                            10.0
 #define JD_HANDLE_SMALL_SEGMENTS
+#define ARC_SUPPORT
 #define DEFAULT_STEPPER_TIMEOUT_SEC              1200
 #define DISABLE_IDLE_X                           false
 #define DISABLE_IDLE_Y                           false
 #define DISABLE_IDLE_Z                           false
 #define DISABLE_IDLE_E                           false
+#define MAX_ARC_SEGMENT_MM                       1.0
+#define MIN_ARC_SEGMENT_MM                       1
+#define MIN_CIRCLE_SEGMENTS                      24
+#define N_ARC_CORRECTION                         25
 #define SLOWDOWN
 #define SLOWDOWN_DIVISOR                         2
 #define MAX_FEEDRATE_EDIT_VALUES                 { 1000, 1000, 40, 60 }
@@ -205,24 +210,12 @@
 //
 #define THERMAL_PROTECTION_HYSTERESIS            4
 #define THERMAL_PROTECTION_PERIOD                40
-#define TEMP_SENSOR_0                            1
-#define TEMP_HYSTERESIS                          3
 #define HEATER_0_MINTEMP                         0
 #define HEATER_0_MAXTEMP                         310
-#define PREHEAT_1_TEMP_HOTEND                    200
 #define BED_OVERSHOOT                            10
 #define HOTEND_OVERSHOOT                         10
-#define PREHEAT_1_FAN_SPEED                      0
-#define PREHEAT_1_LABEL                          "PLA"
-#define PREHEAT_1_TEMP_BED                       60
-#define TEMP_BED_HYSTERESIS                      3
-#define TEMP_BED_RESIDENCY_TIME                  10
-#define TEMP_BED_WINDOW                          1
-#define TEMP_RESIDENCY_TIME                      10
-#define TEMP_WINDOW                              1
 #define AUTOTEMP
 #define AUTOTEMP_OLDWEIGHT                       0.98
-#define TEMP_SENSOR_BED                          14
 #define THERMAL_PROTECTION_BED_HYSTERESIS        2
 #define WATCH_BED_TEMP_INCREASE                  2
 #define WATCH_BED_TEMP_PERIOD                    180
@@ -230,11 +223,7 @@
 #define WATCH_TEMP_PERIOD                        40
 #define FLOW_MINVAL                              10
 #define FLOW_MAXVAL                              200
-#define PREHEAT_2_LABEL                          "TPU"
-#define PREHEAT_2_TEMP_BED                       70
-#define PREHEAT_2_FAN_SPEED                      0
 #define BED_MINTEMP                              0
-#define PREHEAT_2_TEMP_HOTEND                    230
 #define BED_MAXTEMP                              125
 #define AUTOTEMP_FACTOR                          0.1f
 #define AUTOTEMP_MIN                             210
@@ -341,25 +330,16 @@
 #define DWIN_CREALITY_LCD
 #define SPEED_EDIT_MAX                           999
 #define SET_INTERACTION_TIME
-#define AUTOZ_TOOL_Z                             -5
 #define SPEED_EDIT_MIN                           10
 #define SHOW_INTERACTION_TIME
 #define EDITABLE_DISPLAY_TIMEOUT
 #define SOUND_ON_DEFAULT
-#define BABYSTEP_MILLIMETER_UNITS
-#define BABYSTEP_MULTIPLICATOR_Z                 0.01
-#define BETWEEN_Z                                6
 #define FINE_MANUAL_MOVE                         0.025
-#define AUTOZ_BRUSH_W                            6.0
-#define AUTOZ_BRUSH_X                            AUTOZ_TOOL_X + TOOL_BRUSH_X
-#define AUTOZ_BRUSH_Y                            AUTOZ_TOOL_Y + TOOL_BRUSH_Y
 #define SD_PROCEDURE_DEPTH                       1
 #define SHOW_REMAINING_TIME
 #define SET_REMAINING_TIME
 #define SET_PROGRESS_MANUALLY
-#define BABYSTEPPING
 #define FLOW_EDIT_MAX                            999
-#define BABYSTEP_ZPROBE_OFFSET
 #define FLOW_EDIT_MIN                            10
 #define SCROLL_LONG_FILENAMES
 #define M73_REPORT
@@ -368,30 +348,19 @@
 #define ENCODER_5X_STEPS_PER_SEC                 30
 #define SHOW_ELAPSED_TIME
 #define MANUAL_FEEDRATE                          { 50*60, 50*60, 4*60, 2*60 }
-#define BABYSTEP_INVERT_Z                        false
 #define LONG_FILENAME_WRITE_SUPPORT
-#define AUTOTOOL_PRINT
 #define POWER_LOSS_RECOVERY
-#define BABYSTEP_MULTIPLICATOR_XY                1
 #define LONG_FILENAME_HOST_SUPPORT
-#define AUTOZ_BRUSH_H                            6.0
-#define AUTOZ_BRUSH_Z                            0
-#define TOOL_BRUSH_X                             -5
-#define TOOL_BRUSH_Y                             50
 #define NO_SD_AUTOSTART
 #define ONE_CLICK_PRINT
 #define SD_FINISHED_STEPPERRELEASE               true
-#define AUTOZ_TOOL_X                             25
-#define AUTOZ_TOOL_Y                             28
 #define SD_FINISHED_RELEASECOMMAND               "G1 X0 Y215\nM84"
 #define BOOTSCREEN_TIMEOUT                       3000
 #define SET_PROGRESS_PERCENT
 #define DWIN_LCD_BEEP
-#define USE_AUTOZ_TOOL_2
 #define SHOW_PROGRESS_PERCENT
 #define EVENT_GCODE_SD_ABORT                     "G28XY\nG1 X0 Y215\nM84"
 #define SDCARD_RATHERRECENTFIRST
-#define AUTOTOOL_RESULT
 #define POWER_LOSS_MIN_Z_CHANGE                  0.05
 #define POWER_LOSS_ZRAISE                        5
 
@@ -484,13 +453,28 @@
 #define SERVICE_WARNING_BUZZES                   3
 
 //
-// Extras
+// Temperature Presets
 //
-#define ARC_SUPPORT
-#define MAX_ARC_SEGMENT_MM                       1.0
-#define MIN_ARC_SEGMENT_MM                       1
-#define MIN_CIRCLE_SEGMENTS                      24
-#define N_ARC_CORRECTION                         25
+#define PREHEAT_1_TEMP_HOTEND                    200
+#define PREHEAT_1_FAN_SPEED                      0
+#define PREHEAT_1_LABEL                          "PLA"
+#define PREHEAT_1_TEMP_BED                       60
+#define PREHEAT_2_LABEL                          "TPU"
+#define PREHEAT_2_TEMP_BED                       70
+#define PREHEAT_2_FAN_SPEED                      0
+#define PREHEAT_2_TEMP_HOTEND                    230
+
+//
+// Temperature Sensors
+//
+#define TEMP_SENSOR_0                            1
+#define TEMP_HYSTERESIS                          3
+#define TEMP_BED_HYSTERESIS                      3
+#define TEMP_BED_RESIDENCY_TIME                  10
+#define TEMP_BED_WINDOW                          1
+#define TEMP_RESIDENCY_TIME                      10
+#define TEMP_WINDOW                              1
+#define TEMP_SENSOR_BED                          14
 
 //
 // TMC_Smart
@@ -556,3 +540,27 @@
 #define Y_HYBRID_THRESHOLD                       100
 #define Y_HOLD_MULTIPLIER                        0.5
 #define E7_HYBRID_THRESHOLD                      30
+
+//
+// Baby-Stepping
+//
+#define AUTOZ_TOOL_Z                             -5
+#define BABYSTEP_MILLIMETER_UNITS
+#define BABYSTEP_MULTIPLICATOR_Z                 0.01
+#define BETWEEN_Z                                6
+#define AUTOZ_BRUSH_W                            6.0
+#define AUTOZ_BRUSH_X                            AUTOZ_TOOL_X + TOOL_BRUSH_X
+#define AUTOZ_BRUSH_Y                            AUTOZ_TOOL_Y + TOOL_BRUSH_Y
+#define BABYSTEPPING
+#define BABYSTEP_ZPROBE_OFFSET
+#define BABYSTEP_INVERT_Z                        false
+#define AUTOTOOL_PRINT
+#define BABYSTEP_MULTIPLICATOR_XY                1
+#define AUTOZ_BRUSH_H                            6.0
+#define AUTOZ_BRUSH_Z                            0
+#define TOOL_BRUSH_X                             -5
+#define TOOL_BRUSH_Y                             50
+#define AUTOZ_TOOL_X                             25
+#define AUTOZ_TOOL_Y                             28
+#define USE_AUTOZ_TOOL_2
+#define AUTOTOOL_RESULT
