@@ -24,7 +24,6 @@
 // #include "../lcd/dwin/e3v2/dwin.h"
 #include "../../src/feature/bedlevel/bedlevel.h"
 #include "../../src/feature/babystep.h"
-#include "probe.h"
 
 #include "stdio.h"
 #include "string.h"
@@ -105,7 +104,7 @@
 //Delay us (microseconds)
 #define TIME_DELAY_US(dUs)              DELAY_US(dUs)
 //Marlin's idle() main loop
-#define MARLIN_CORE_IDLE()              idle()
+#define MARLIN_CORE_IDLE()              marlin.idle()
 //Update watchdog
 #define REFRESH_WATCHDOG()              {HAL_watchdog_refresh();}
 //Block the execution of a gcode instruction

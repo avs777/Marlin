@@ -51,9 +51,8 @@
 #if ENABLED(EXTENSIBLE_UI)
   #include "../../../lcd/extui/ui_api.h"
 #elif ENABLED(DWIN_CREALITY_LCD)
-  #include "../../../lcd/e3v2/creality/dwin.h"
-  #include "../../../lcd/e3v2/creality/ui_position.h"
-  
+  #include "../../../lcd/dwin/creality/dwin.h"
+  #include "../../../lcd/dwin/creality/ui_position.h"
 #elif ENABLED(SOVOL_SV06_RTS)
   #include "../../../lcd/sovol_rts/sovol_rts.h"
 #endif
@@ -293,9 +292,9 @@ G29_TYPE GcodeSuite::G29() {
   // Set and report "probing" state to host
   TERN_(FULL_REPORT_TO_HOST_FEATURE, set_and_report_grblstate(M_PROBE, false));
 
-  #if DISABLED(PROBE_MANUALLY) && ENABLED(FT_MOTION)
+  #if DISABLED(PROBE_MANUALLY)
     // Potentially disable Fixed-Time Motion for probing
-    FTMotionDisableInScope FT_Disabler;
+    TERN_(FT_MOTION, FTM_DISABLE_IN_SCOPE());
   #endif
 
   /**
@@ -779,7 +778,7 @@ G29_TYPE GcodeSuite::G29() {
             for (;;) {
               pos = planner.get_axis_position_mm(axis);
               if (inInc > 0 ? (pos >= cmp) : (pos <= cmp)) break;
-              idle_no_sleep();
+              marlin.idle_no_sleep();
             }
             //if (DEBUGGING(LEVELING)) DEBUG_ECHOLNPGM_P(axis == Y_AXIS ? PSTR("Y=") : PSTR("X=", pos);
 
@@ -828,8 +827,8 @@ G29_TYPE GcodeSuite::G29() {
           #endif
 
           abl.reenable = false; // Don't re-enable after modifying the mesh
-          HMI_flag.G29_level_not_normal=false; //g29 leveling is abnormal
-          idle_no_sleep();
+          HMI_flag.G29_level_not_normal=false; //g29 leveling is abnormal - E3V3SE
+          marlin.idle_no_sleep();
 
         } // inner
       } // outer

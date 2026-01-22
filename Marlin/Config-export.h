@@ -2,7 +2,7 @@
  * Config.h - Marlin Firmware distilled configuration
  * Usage: Place this file in the 'Marlin' folder with the name 'Config.h'.
  *
- * Exported by Marlin build on 2026-01-06 at 14:43:35.
+ * Exported by Marlin build on 2026-01-22 at 03:05:47.
  */
 
 //
@@ -247,9 +247,9 @@
 #define PIDTEMP
 #define PID_K1                                   0.95
 #define PID_MAX                                  255
-#define DEFAULT_Kd                               26.68
-#define DEFAULT_Ki                               3.93
-#define DEFAULT_Kp                               20.49
+#define DEFAULT_KP                               20.49
+#define DEFAULT_KI                               3.93
+#define DEFAULT_KD                               26.68
 
 //
 // PID Temp
@@ -260,10 +260,10 @@
 // Bed Temp
 //
 #define MAX_BED_POWER                            255
-#define DEFAULT_bedKi                            14.29
+#define DEFAULT_BED_KI                           14.29
 #define PIDTEMPBED
-#define DEFAULT_bedKp                            123.71
-#define DEFAULT_bedKd                            713.77
+#define DEFAULT_BED_KD                           713.77
+#define DEFAULT_BED_KP                           123.71
 
 //
 // Fans
@@ -343,7 +343,6 @@
 #define SET_INTERACTION_TIME
 #define AUTOZ_TOOL_Z                             -5
 #define SPEED_EDIT_MIN                           10
-#define M73_REPORT
 #define SHOW_INTERACTION_TIME
 #define EDITABLE_DISPLAY_TIMEOUT
 #define SOUND_ON_DEFAULT
@@ -363,6 +362,7 @@
 #define BABYSTEP_ZPROBE_OFFSET
 #define FLOW_EDIT_MIN                            10
 #define SCROLL_LONG_FILENAMES
+#define M73_REPORT
 #define PLR_ENABLED_DEFAULT                      true
 #define M73_REPORT_SD_ONLY
 #define ENCODER_5X_STEPS_PER_SEC                 30
@@ -378,6 +378,7 @@
 #define AUTOZ_BRUSH_Z                            0
 #define TOOL_BRUSH_X                             -5
 #define TOOL_BRUSH_Y                             50
+#define NO_SD_AUTOSTART
 #define ONE_CLICK_PRINT
 #define SD_FINISHED_STEPPERRELEASE               true
 #define AUTOZ_TOOL_X                             25
@@ -389,7 +390,6 @@
 #define USE_AUTOZ_TOOL_2
 #define SHOW_PROGRESS_PERCENT
 #define EVENT_GCODE_SD_ABORT                     "G28XY\nG1 X0 Y215\nM84"
-#define NO_SD_AUTOSTART
 #define SDCARD_RATHERRECENTFIRST
 #define AUTOTOOL_RESULT
 #define POWER_LOSS_MIN_Z_CHANGE                  0.05

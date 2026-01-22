@@ -16,7 +16,7 @@
 #include "../../feature/bedlevel/bedlevel.h"
 #include "../../feature/bedlevel/abl/bbl.h"
 #include "../../module/AutoOffset.h"
-#include "../../lcd/e3v2/creality/dwin.h"
+#include "../../lcd/dwin/creality/dwin.h"
 
 
 /**
