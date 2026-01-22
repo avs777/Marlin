@@ -15,7 +15,7 @@ AVS: My tweaks
 - Ender-3-V3-SE-bugfix-2.1.x-20260119-222252.bin - default PIDs and acceleration
 - Ender-3-V3-SE-bugfix-2.1.x-20260120-215412.bin - turn off Smooth LA
 - Ender-3-V3-SE-bugfix-2.1.x-20260121-082443.bin - Handle K in g-code
-- Ender-3-V3-SE-bugfix-2.1.x-20260121-231838.bin - Merge latest Marlin Bugfix 2.1.x Branch + S_CURVE_FACTOR
+- Ender-3-V3-SE-bugfix-2.1.x-20260122-124400.bin - Merge latest Marlin Bugfix 2.1.x Branch + S_CURVE_FACTOR
 
 This version of Firmware uses the Marlin Bugfix 2.1.x Branch to bring all the goodies of the updated version into the Ender 3 V3 SE.
 

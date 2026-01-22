@@ -25,7 +25,7 @@
  * Release version. Leave the Marlin version or apply a custom scheme.
  */
 #ifndef SHORT_BUILD_VERSION
-  #define SHORT_BUILD_VERSION "avs v2.1.x-20260121" // AVS
+  #define SHORT_BUILD_VERSION "avs v2.1.x-20260122" // AVS
 #endif
 
 /**
@@ -42,7 +42,7 @@
  * version was tagged.
  */
 #ifndef STRING_DISTRIBUTION_DATE
-  #define STRING_DISTRIBUTION_DATE "2026-01-21" // AVS
+  #define STRING_DISTRIBUTION_DATE "2026-01-22" // AVS
 #endif
 
 /**
