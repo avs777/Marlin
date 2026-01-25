@@ -1158,14 +1158,14 @@
  * Enable/disable and set parameters with G-code M493 and M494.
  * See ft_types.h for named values used by FTM options.
  */
-//#define FT_MOTION
+#define FT_MOTION  // AVS
 #if ENABLED(FT_MOTION)
-  //#define FTM_IS_DEFAULT_MOTION               // Use FT Motion as the factory default?
-  //#define FT_MOTION_MENU                      // Provide a MarlinUI menu to set M493 and M494 parameters
+  #define FTM_IS_DEFAULT_MOTION               // Use FT Motion as the factory default?  // AVS
+  #define FT_MOTION_MENU                      // Provide a MarlinUI menu to set M493 and M494 parameters  // AVS
 
-  //#define NO_STANDARD_MOTION                  // Disable the standard motion system entirely to save Flash and RAM
+  #define NO_STANDARD_MOTION                  // Disable the standard motion system entirely to save Flash and RAM  // AVS
   #if DISABLED(NO_STANDARD_MOTION)
-    //#define FTM_HOME_AND_PROBE                // Use FT Motion for homing / probing. Disable if FT Motion breaks these functions.
+    #define FTM_HOME_AND_PROBE                // Use FT Motion for homing / probing. Disable if FT Motion breaks these functions. // AVS
   #endif
 
   //#define FTM_DYNAMIC_FREQ                    // Enable for linear adjustment of XY shaping frequency according to Z or E
@@ -1183,14 +1183,14 @@
   #define FTM_SHAPER_3HEI
   #define FTM_SHAPER_MZV
 
-  #define FTM_DEFAULT_SHAPER_X      ftMotionShaper_NONE // Default shaper mode on X axis (NONE, ZV, ZVD, ZVDD, ZVDDD, EI, 2HEI, 3HEI, MZV)
-  #define FTM_SHAPING_DEFAULT_FREQ_X   37.0f    // (Hz) Default peak frequency used by input shapers
-  #define FTM_SHAPING_ZETA_X            0.1f    // Zeta used by input shapers for X axis
+  #define FTM_DEFAULT_SHAPER_X      ftMotionShaper_EI // Default shaper mode on X axis (NONE, ZV, ZVD, ZVDD, ZVDDD, EI, 2HEI, 3HEI, MZV) // AVS
+  #define FTM_SHAPING_DEFAULT_FREQ_X   46.00f    // (Hz) Default peak frequency used by input shapers  // AVS  42?
+  #define FTM_SHAPING_ZETA_X            0.12f    // Zeta used by input shapers for X axis
   #define FTM_SHAPING_V_TOL_X           0.05f   // Vibration tolerance used by EI input shapers for X axis
 
-  #define FTM_DEFAULT_SHAPER_Y      ftMotionShaper_NONE // Default shaper mode on Y axis
-  #define FTM_SHAPING_DEFAULT_FREQ_Y   37.0f    // (Hz) Default peak frequency used by input shapers
-  #define FTM_SHAPING_ZETA_Y            0.1f    // Zeta used by input shapers for Y axis
+  #define FTM_DEFAULT_SHAPER_Y      ftMotionShaper_EI // Default shaper mode on Y axis // AVS
+  #define FTM_SHAPING_DEFAULT_FREQ_Y   46.00f    // (Hz) Default peak frequency used by input shapers  // AVS
+  #define FTM_SHAPING_ZETA_Y            0.12f    // Zeta used by input shapers for Y axis
   #define FTM_SHAPING_V_TOL_Y           0.05f   // Vibration tolerance used by EI input shapers for Y axis
 
   //#define FTM_SHAPER_Z                        // Include Z shaping support
@@ -1208,15 +1208,15 @@
 
   //#define FTM_RESONANCE_TEST                  // Sine sweep motion for resonance study
 
-  //#define FTM_SMOOTHING                       // Smoothing can reduce artifacts and make steppers quieter
+  #define FTM_SMOOTHING                       // Smoothing can reduce artifacts and make steppers quieter   // AVS
                                                 // on sharp corners, but too much will round corners.
   #if ENABLED(FTM_SMOOTHING)
     #define FTM_MAX_SMOOTHING_TIME      0.10f   // (s) Maximum smoothing time. Higher values consume more RAM.
                                                 // Increase smoothing time to reduce jerky motion, ghosting and noises.
-    #define FTM_SMOOTHING_TIME_X        0.00f   // (s) Smoothing time for X axis. Zero means disabled.
-    #define FTM_SMOOTHING_TIME_Y        0.00f   // (s) Smoothing time for Y axis
-    #define FTM_SMOOTHING_TIME_Z        0.00f   // (s) Smoothing time for Z axis
-    #define FTM_SMOOTHING_TIME_E        0.02f   // (s) Smoothing time for E axis. Prevents noise/skipping from LA by
+    #define FTM_SMOOTHING_TIME_X        0.005f   // (s) Smoothing time for X axis. Zero means disabled.  // AVS
+    #define FTM_SMOOTHING_TIME_Y        0.005f   // (s) Smoothing time for Y axis  // AVS
+    #define FTM_SMOOTHING_TIME_Z        0.005f   // (s) Smoothing time for Z axis  // AVS
+    #define FTM_SMOOTHING_TIME_E        0.01f   // (s) Smoothing time for E axis. Prevents noise/skipping from LA by
                                                 //     smoothing acceleration peaks, which may also smooth curved surfaces.
   #endif
 
@@ -1276,8 +1276,8 @@
  *
  * Tune with M593 D<factor> F<frequency>
  */
-#define INPUT_SHAPING_X // AVS
-#define INPUT_SHAPING_Y // AVS
+// #define INPUT_SHAPING_X // AVS
+// #define INPUT_SHAPING_Y // AVS
 // #define INPUT_SHAPING_Z // AVS
 #if ANY(INPUT_SHAPING_X, INPUT_SHAPING_Y, INPUT_SHAPING_Z)
   #if ENABLED(INPUT_SHAPING_X)
@@ -1723,7 +1723,7 @@
    * LED Control Menu
    * Add LED Control to the LCD menu
    */
-  #define LED_CONTROL_MENU // AVS
+  // #define LED_CONTROL_MENU // AVS
   #if ENABLED(LED_CONTROL_MENU)
     #define LED_COLOR_PRESETS                 // Enable the Preset Color menu option
     //#define NEO2_COLOR_PRESETS              // Enable a second NeoPixel Preset Color menu option
@@ -2442,7 +2442,7 @@
  *
  * See https://marlinfw.org/docs/features/lin_advance.html for full instructions.
  */
-#define LIN_ADVANCE  // AVS
+// #define LIN_ADVANCE  // AVS
 
 #if ANY(LIN_ADVANCE, FT_MOTION)
   #if ENABLED(DISTINCT_E_FACTORS)
@@ -3143,7 +3143,7 @@
   #endif
 
   #if AXIS_IS_TMC_CONFIG(X)
-    #define X_CURRENT       580        // (mA) RMS current. Multiply by 1.414 for peak current. // AVS
+    #define X_CURRENT       850        // (mA) RMS current. Multiply by 1.414 for peak current. // AVS
     #define X_CURRENT_HOME  X_CURRENT / 2  // (mA) RMS current for homing. (Typically lower than *_CURRENT.) // AVS
     #define X_MICROSTEPS     16        // 0..256
     #define X_RSENSE          0.11
@@ -3163,7 +3163,7 @@
   #endif
 
   #if AXIS_IS_TMC_CONFIG(Y)
-    #define Y_CURRENT       580 // AVS
+    #define Y_CURRENT       850 // AVS
     #define Y_CURRENT_HOME  Y_CURRENT / 2 // AVS
     #define Y_MICROSTEPS     16
     #define Y_RSENSE          0.11
@@ -3183,7 +3183,7 @@
   #endif
 
   #if AXIS_IS_TMC_CONFIG(Z)
-    #define Z_CURRENT       580 // AVS
+    #define Z_CURRENT       700 // AVS
     #define Z_CURRENT_HOME  Z_CURRENT / 2 // ASV
     #define Z_MICROSTEPS     16
     #define Z_RSENSE          0.11
@@ -3283,7 +3283,7 @@
   #endif
 
   #if AXIS_IS_TMC_CONFIG(E0)
-    #define E0_CURRENT      650 // AVS
+    #define E0_CURRENT      800 // AVS
     #define E0_MICROSTEPS    16
     #define E0_RSENSE         0.11
     #define E0_CHAIN_POS     -1

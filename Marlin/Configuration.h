@@ -1361,11 +1361,11 @@
  * Override with M201
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_ACCELERATION      { 2500, 2500, 300, 10000 } // AVS
+#define DEFAULT_MAX_ACCELERATION      { 7000, 7000, 300, 10000 } // AVS
 
 #define LIMITED_MAX_ACCEL_EDITING     // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
 #if ENABLED(LIMITED_MAX_ACCEL_EDITING)
-  #define MAX_ACCEL_EDIT_VALUES       { 8000, 8000, 1000, 20000 } // ...or, set your own edit limits
+  #define MAX_ACCEL_EDIT_VALUES       { 12000, 12000, 1000, 20000 } // ...or, set your own edit limits
 #endif
 
 /**
@@ -1376,9 +1376,9 @@
  *   M204 R    Retract Acceleration
  *   M204 T    Travel Acceleration
  */
-#define DEFAULT_ACCELERATION          1000    // X, Y, Z and E acceleration for printing moves // AVS
-#define DEFAULT_RETRACT_ACCELERATION  2500    // E acceleration for retracts
-#define DEFAULT_TRAVEL_ACCELERATION   2500    // X, Y, Z acceleration for travel (non printing) moves // AVS
+#define DEFAULT_ACCELERATION          5000    // X, Y, Z and E acceleration for printing moves // AVS
+#define DEFAULT_RETRACT_ACCELERATION  5000    // E acceleration for retracts  // AVS
+#define DEFAULT_TRAVEL_ACCELERATION   6000    // X, Y, Z acceleration for travel (non printing) moves // AVS
 
 /**
  * Default Jerk limits (mm/s)
@@ -1388,12 +1388,12 @@
  * When changing speed and direction, if the difference is less than the
  * value set here, it may happen instantaneously.
  */
-//#define CLASSIC_JERK
+#define CLASSIC_JERK  // AVS use this with FT_MOTION
 #if ENABLED(CLASSIC_JERK)
   #define DEFAULT_XJERK  10.0
   #define DEFAULT_YJERK  10.0
-  #define DEFAULT_ZJERK  0.6
-  #define DEFAULT_EJERK  8.0
+  #define DEFAULT_ZJERK  0.4  // AVS
+  #define DEFAULT_EJERK  5.0  // AVS
   //#define DEFAULT_IJERK  0.3
   //#define DEFAULT_JJERK  0.3
   //#define DEFAULT_KJERK  0.3
@@ -1430,7 +1430,7 @@
  *
  * See https://github.com/synthetos/TinyG/wiki/Jerk-Controlled-Motion-Explained
  */
-#define S_CURVE_ACCELERATION // AVS - SMOOTH_LIN_ADVANCE was not compatible with S_CURVE_ACCELERATION as some point. TODO: Verify compatibility.
+// #define S_CURVE_ACCELERATION // AVS - SMOOTH_LIN_ADVANCE was not compatible with S_CURVE_ACCELERATION as some point. TODO: Verify compatibility.
 #if ENABLED(S_CURVE_ACCELERATION)
   // Define to use 4th instead of 6th order motion curve
   #define S_CURVE_FACTOR 0.25    // Initial and final acceleration factor, ideally 0.1 to 0.4. // AVS, default 0.25
@@ -2412,10 +2412,10 @@
 #endif
 
 // Homing speeds (linear=mm/min, rotational=°/min)
-#define HOMING_FEEDRATE_MM_M { (150*60), (150*60), (8*60) } // AVS
+#define HOMING_FEEDRATE_MM_M { (80*60), (80*60), (8*60) } // AVS
 
 // Edit homing feedrates with M210 and MarlinUI menu items
-//#define EDITABLE_HOMING_FEEDRATE
+#define EDITABLE_HOMING_FEEDRATE // AVS
 
 // Validate that endstops are triggered on homing moves
 #define VALIDATE_HOMING_ENDSTOPS
@@ -3722,7 +3722,7 @@
 #endif
 
 // Support for Adafruit NeoPixel LED driver
-#define NEOPIXEL_LED // AVS
+// #define NEOPIXEL_LED // AVS
 #if ENABLED(NEOPIXEL_LED)
   #define NEOPIXEL_TYPE          NEO_GRBW // NEO_GRBW, NEO_RGBW, NEO_GRB, NEO_RBG, etc.
                                           // See https://github.com/adafruit/Adafruit_NeoPixel/blob/master/Adafruit_NeoPixel.h
