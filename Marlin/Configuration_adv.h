@@ -1183,14 +1183,14 @@
   #define FTM_SHAPER_3HEI
   #define FTM_SHAPER_MZV
 
-  #define FTM_DEFAULT_SHAPER_X      ftMotionShaper_EI // Default shaper mode on X axis (NONE, ZV, ZVD, ZVDD, ZVDDD, EI, 2HEI, 3HEI, MZV) // AVS
-  #define FTM_SHAPING_DEFAULT_FREQ_X   46.00f    // (Hz) Default peak frequency used by input shapers  // AVS  42?
-  #define FTM_SHAPING_ZETA_X            0.12f    // Zeta used by input shapers for X axis
+  #define FTM_DEFAULT_SHAPER_X      ftMotionShaper_3HEI // Default shaper mode on X axis (NONE, ZV, ZVD, ZVDD, ZVDDD, EI, 2HEI, 3HEI, MZV) // AVS
+  #define FTM_SHAPING_DEFAULT_FREQ_X   50.00f    // (Hz) Default peak frequency used by input shapers  // AVS  42?
+  #define FTM_SHAPING_ZETA_X            0.18f    // Zeta used by input shapers for X axis
   #define FTM_SHAPING_V_TOL_X           0.05f   // Vibration tolerance used by EI input shapers for X axis
 
-  #define FTM_DEFAULT_SHAPER_Y      ftMotionShaper_EI // Default shaper mode on Y axis // AVS
-  #define FTM_SHAPING_DEFAULT_FREQ_Y   46.00f    // (Hz) Default peak frequency used by input shapers  // AVS
-  #define FTM_SHAPING_ZETA_Y            0.12f    // Zeta used by input shapers for Y axis
+  #define FTM_DEFAULT_SHAPER_Y      ftMotionShaper_3HEI // Default shaper mode on Y axis // AVS
+  #define FTM_SHAPING_DEFAULT_FREQ_Y   43.20f    // (Hz) Default peak frequency used by input shapers  // AVS
+  #define FTM_SHAPING_ZETA_Y            0.18f    // Zeta used by input shapers for Y axis
   #define FTM_SHAPING_V_TOL_Y           0.05f   // Vibration tolerance used by EI input shapers for Y axis
 
   //#define FTM_SHAPER_Z                        // Include Z shaping support

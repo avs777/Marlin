@@ -28,6 +28,7 @@
 - `Ender-3-SKR-bugfix-2.1.x-20260120-095000` - ^ + K calibration
 - `Ender-3-SKR-bugfix-2.1.x-20260121-085000` - ^ + handle K in g-code
 - `Ender-3-SKR-bugfix-2.1.x-20260124-223000` - ^ + FT Motion enable and calibrate
+- `Ender-3-SKR-bugfix-2.1.x-20260127-100000` - ^ + Change to Creality KE hotend
 
 
 <p align="center"><img src="buildroot/share/pixmaps/logo/marlin-outrun-nf-500.png" height="250" alt="MarlinFirmware's logo" /></p>

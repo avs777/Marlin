@@ -581,7 +581,7 @@
  *   998 : Dummy Table that ALWAYS reads 25°C or the temperature defined below.
  *   999 : Dummy Table that ALWAYS reads 100°C or the temperature defined below.
  */
-#define TEMP_SENSOR_0 1047 // AVS
+#define TEMP_SENSOR_0 1  // 1047 // AVS   20260127 - Changed to 1 for KE hotend
 #define TEMP_SENSOR_1 0
 #define TEMP_SENSOR_2 0
 #define TEMP_SENSOR_3 0
@@ -671,7 +671,7 @@
 // Above this temperature the heater will be switched off.
 // This can protect components from overheating, but NOT from shorts and failures.
 // (Use MINTEMP for thermistor short/failure protection.)
-#define HEATER_0_MAXTEMP 315 // AVS
+#define HEATER_0_MAXTEMP 310 // AVS
 #define HEATER_1_MAXTEMP 275
 #define HEATER_2_MAXTEMP 275
 #define HEATER_3_MAXTEMP 275
@@ -688,7 +688,7 @@
  * (especially before PID tuning). Setting the target temperature too close to MAXTEMP guarantees
  * a MAXTEMP shutdown! Use these values to forbid temperatures being set too close to MAXTEMP.
  */
-#define HOTEND_OVERSHOOT 15   // (°C) Forbid temperatures over MAXTEMP - OVERSHOOT
+#define HOTEND_OVERSHOOT 10   // (°C) Forbid temperatures over MAXTEMP - OVERSHOOT  // AVS
 #define BED_OVERSHOOT    10   // (°C) Forbid temperatures over MAXTEMP - OVERSHOOT
 #define COOLER_OVERSHOOT  2   // (°C) Forbid temperatures closer than OVERSHOOT
 
@@ -708,7 +708,7 @@
 #define PIDTEMP           // See the PID Tuning Guide at https://reprap.org/wiki/PID_Tuning
 //#define MPCTEMP         // See https://marlinfw.org/docs/features/model_predictive_control.html
 
-#define PID_MAX  255      // Limit hotend current while PID is active (see PID_FUNCTIONAL_RANGE below); 255=full current
+#define PID_MAX  300      // Limit hotend current while PID is active (see PID_FUNCTIONAL_RANGE below); 255=full current
 #define PID_K1     0.95   // Smoothing factor within any PID loop
 
 #if ENABLED(PIDTEMP)
@@ -726,9 +726,9 @@
     #define DEFAULT_KI_LIST {   1.08,   1.08 }
     #define DEFAULT_KD_LIST { 114.00, 114.00 }
   #else
-    #define DEFAULT_KP  15.2258 // AVS
-    #define DEFAULT_KI   1.9245 // AVS
-    #define DEFAULT_KD  30.1148 // AVS
+    #define DEFAULT_KP  15.60 // AVS
+    #define DEFAULT_KI   2.16 // AVS
+    #define DEFAULT_KD  28.00 // AVS
   #endif
 #else
   #define BANG_MAX 255    // Limit hotend current while in bang-bang mode; 255=full current
