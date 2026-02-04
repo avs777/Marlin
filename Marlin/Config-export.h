@@ -2,7 +2,7 @@
  * Config.h - Marlin Firmware distilled configuration
  * Usage: Place this file in the 'Marlin' folder with the name 'Config.h'.
  *
- * Exported by Marlin build on 2026-01-22 at 20:40:10.
+ * Exported by Marlin build on 2026-02-04 at 18:52:49.
  */
 
 //
@@ -568,8 +568,8 @@
 #define AUTOZ_BRUSH_W                            6.0
 #define AUTOZ_BRUSH_X                            AUTOZ_TOOL_X + TOOL_BRUSH_X
 #define AUTOZ_BRUSH_Y                            AUTOZ_TOOL_Y + TOOL_BRUSH_Y
-#define BABYSTEPPING
 #define BABYSTEP_ZPROBE_OFFSET
+#define BABYSTEPPING
 #define BABYSTEP_INVERT_Z                        false
 #define AUTOTOOL_PRINT
 #define BABYSTEP_MULTIPLICATOR_XY                1
