@@ -2,7 +2,7 @@
  * Config.h - Marlin Firmware distilled configuration
  * Usage: Place this file in the 'Marlin' folder with the name 'Config.h'.
  *
- * Exported by Marlin build on 2026-02-04 at 18:52:49.
+ * Exported by Marlin build on 2026-02-10 at 04:21:02.
  */
 
 //
@@ -240,9 +240,9 @@
 #define PIDTEMP
 #define PID_K1                                   0.95
 #define PID_MAX                                  255
-#define DEFAULT_KP                               22.01
-#define DEFAULT_KI                               3.92
-#define DEFAULT_KD                               30.82
+#define DEFAULT_KP                               18.11
+#define DEFAULT_KI                               3.19
+#define DEFAULT_KD                               25.71
 
 //
 // PID Temp
@@ -253,10 +253,10 @@
 // Bed Temp
 //
 #define MAX_BED_POWER                            255
-#define DEFAULT_BED_KI                           16.51
+#define DEFAULT_BED_KI                           15.91
 #define PIDTEMPBED
-#define DEFAULT_BED_KD                           980.91
-#define DEFAULT_BED_KP                           155.86
+#define DEFAULT_BED_KD                           961.57
+#define DEFAULT_BED_KP                           151.50
 
 //
 // Fans
