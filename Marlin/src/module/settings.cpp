@@ -80,16 +80,16 @@
 #endif
 
 #if ENABLED(DWIN_LCD_PROUI)
-  #include "../lcd/e3v2/proui/dwin.h"
-  #include "../lcd/e3v2/proui/bedlevel_tools.h"
+  #include "../lcd/dwin/proui/dwin.h"
+  #include "../lcd/dwin/proui/bedlevel_tools.h"
 #endif
 
 #if ENABLED(EXTENSIBLE_UI)
   #include "../lcd/extui/ui_api.h"
 #elif ENABLED(DWIN_CREALITY_LCD_JYERSUI)
-  #include "../lcd/e3v2/jyersui/dwin.h"
+  #include "../lcd/dwin/jyersui/dwin.h"
 #elif ENABLED(DWIN_CREALITY_LCD)
-  #include "../lcd/e3v2/creality/dwin.h"
+  #include "../lcd/dwin/creality/dwin.h"
 #endif
 
 #if ENABLED(HOST_PROMPT_SUPPORT)
@@ -759,7 +759,7 @@ uint16_t MarlinSettings::datasize() { return sizeof(SettingsData); }
 #endif
 
 void MarlinSettings::postprocess() {
-  xyze_pos_t oldpos = current_position;
+  xyze_pos_t oldpos = motion.position;
 
   // steps per s2 needs to be updated to agree with units per s2
   planner.refresh_acceleration_rates();
@@ -778,7 +778,7 @@ void MarlinSettings::postprocess() {
   #endif
 
   // Software endstops depend on home_offset
-  LOOP_NUM_AXES(i) update_software_endstops((AxisEnum)i);
+  LOOP_NUM_AXES(i) motion.update_software_endstops((AxisEnum)i);
 
   TERN_(ENABLE_LEVELING_FADE_HEIGHT, set_z_fade_height(new_z_fade_height, false)); // false = no report
 
@@ -795,12 +795,12 @@ void MarlinSettings::postprocess() {
   TERN_(EXTENSIBLE_UI, ExtUI::onPostprocessSettings());
 
   // Refresh mm_per_step with the reciprocal of axis_steps_per_mm
-  // and init stepper.count[], planner.position[] with current_position
+  // and init stepper.count[], planner.position[] with current position
   planner.refresh_positioning();
 
   // Various factors can change the current position
-  if (oldpos != current_position)
-    report_current_position();
+  if (oldpos != motion.position)
+    motion.report_position();
 
   // Moved as last update due to interference with NeoPixel init
   // TERN_(HAS_LCD_CONTRAST, ui.refresh_contrast());
@@ -975,11 +975,11 @@ void MarlinSettings::postprocess() {
       _FIELD_TEST(home_offset);
 
       #if HAS_SCARA_OFFSET
-        EEPROM_WRITE(scara_home_offset);
+        EEPROM_WRITE(motion.scara_home_offset);
+      #elif HAS_HOME_OFFSET
+        EEPROM_WRITE(motion.home_offset);
       #else
-        #if !HAS_HOME_OFFSET
-          const xyz_pos_t home_offset{0};
-        #endif
+        const xyz_pos_t home_offset{0};
         EEPROM_WRITE(home_offset);
       #endif
     }
@@ -992,7 +992,7 @@ void MarlinSettings::postprocess() {
       #if HAS_HOTEND_OFFSET
         // Skip hotend 0 which must be 0
         for (uint8_t e = 1; e < HOTENDS; ++e)
-          EEPROM_WRITE(hotend_offset[e]);
+          EEPROM_WRITE(motion.hotend_offset[e]);
       #endif
     }
 
@@ -2091,11 +2091,11 @@ void MarlinSettings::postprocess() {
         _FIELD_TEST(home_offset);
 
         #if HAS_SCARA_OFFSET
-          EEPROM_READ(scara_home_offset);
+          EEPROM_READ(motion.scara_home_offset);
+        #elif HAS_HOME_OFFSET
+          EEPROM_READ(motion.home_offset);
         #else
-          #if !HAS_HOME_OFFSET
-            xyz_pos_t home_offset;
-          #endif
+          xyz_pos_t home_offset;
           EEPROM_READ(home_offset);
         #endif
       }
@@ -2108,7 +2108,7 @@ void MarlinSettings::postprocess() {
         #if HAS_HOTEND_OFFSET
           // Skip hotend 0 which must be 0
           for (uint8_t e = 1; e < HOTENDS; ++e)
-            EEPROM_READ(hotend_offset[e]);
+            EEPROM_READ(motion.hotend_offset[e]);
         #endif
       }
 
@@ -3499,15 +3499,15 @@ void MarlinSettings::reset() {
   // Home Offset
   //
   #if HAS_SCARA_OFFSET
-    scara_home_offset.reset();
+    motion.scara_home_offset.reset();
   #elif HAS_HOME_OFFSET
-    home_offset.reset();
+    motion.home_offset.reset();
   #endif
 
   //
   // Hotend Offsets
   //
-  TERN_(HAS_HOTEND_OFFSET, reset_hotend_offsets());
+  TERN_(HAS_HOTEND_OFFSET, motion.reset_hotend_offsets());
 
   //
   // Spindle Acceleration

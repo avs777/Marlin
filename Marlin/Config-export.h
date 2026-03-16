@@ -2,7 +2,7 @@
  * Config.h - Marlin Firmware distilled configuration
  * Usage: Place this file in the 'Marlin' folder with the name 'Config.h'.
  *
- * Exported by Marlin build on 2026-01-21 at 16:21:32.
+ * Exported by Marlin build on 2026-02-28 at 15:56:40.
  */
 
 //
@@ -263,9 +263,9 @@
 #define PIDTEMP
 #define PID_K1                                   0.95
 #define PID_MAX                                  255
-#define DEFAULT_Kd                               30.82
-#define DEFAULT_Ki                               3.92
-#define DEFAULT_Kp                               22.01
+#define DEFAULT_Kd                               25.71
+#define DEFAULT_Ki                               3.19
+#define DEFAULT_Kp                               18.11
 
 //
 // PID Temp
@@ -276,10 +276,10 @@
 // Bed Temp
 //
 #define MAX_BED_POWER                            255
-#define DEFAULT_bedKi                            16.51
+#define DEFAULT_bedKi                            15.91
 #define PIDTEMPBED
-#define DEFAULT_bedKp                            155.86
-#define DEFAULT_bedKd                            980.91
+#define DEFAULT_bedKp                            151.50
+#define DEFAULT_bedKd                            961.57
 
 //
 // Fans
@@ -374,11 +374,11 @@
 #define SHOW_REMAINING_TIME
 #define SET_REMAINING_TIME
 #define SET_PROGRESS_MANUALLY
-#define BABYSTEPPING
 #define FLOW_EDIT_MAX                            999
 #define BABYSTEP_ZPROBE_OFFSET
 #define FLOW_EDIT_MIN                            10
 #define SCROLL_LONG_FILENAMES
+#define BABYSTEPPING
 #define PLR_ENABLED_DEFAULT                      true
 #define M73_REPORT_SD_ONLY
 #define ENCODER_5X_STEPS_PER_SEC                 30
