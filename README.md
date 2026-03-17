@@ -31,6 +31,7 @@
 - `Ender-3-SKR-bugfix-2.1.x-20260127-100000` - ^ + Change to Creality KE hotend
 - `Ender-3-SKR-bugfix-2.1.x-20260202-200000` - ^ + sync with latest Marlin `bugfix-2.1.x` updates
 - `Ender-3-SKR-bugfix-2.1.x-20260209-210000` - ^ + sync with latest Marlin `bugfix-2.1.x` updates
+- `Ender-3-SKR-bugfix-2.1.x-20260316-212000` - ^ + sync with latest Marlin `bugfix-2.1.x` updates
 
 
 <p align="center"><img src="buildroot/share/pixmaps/logo/marlin-outrun-nf-500.png" height="250" alt="MarlinFirmware's logo" /></p>
