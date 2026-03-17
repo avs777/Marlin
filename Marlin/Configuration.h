@@ -61,7 +61,7 @@
 // @section info
 
 // Author info of this build printed to the host during boot and M115
-#define STRING_CONFIG_H_AUTHOR "Marlin, Creality, Kraplax & Navaismo" // Original author or contributor.
+#define STRING_CONFIG_H_AUTHOR "Marlin, Creality, Kraplax, Navaismo & AVS" // Original author or contributor.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
 // @section machine
@@ -3139,6 +3139,18 @@
 // Uses the code directly from Sailfish
 //
 //#define FF_INTERFACEBOARD
+
+//
+// MightyBoard LCD and Interface
+//
+//#define MIGHTYBOARD_LCD
+#if ENABLED(MIGHTYBOARD_LCD)
+  //#define MIGHTYBOARD_DEBUG               // Lightweight debug output for buttons and encoder
+  //#define MIGHTYBOARD_DISABLE_ENC_PULLUP  // Enable if the encoder button is unreliable
+  //#define MIGHTYBOARD_BUTTON_PULLUPS      // Enable if other buttons are unreliable
+  //#define MIGHTYBOARD_BACK_STATUS_BUTTONS // Use LEFT/RIGHT buttons for Back / Home.
+                                            // Otherwise they act like encoder down / up.
+#endif
 
 //
 // TFT GLCD Panel with Marlin UI
