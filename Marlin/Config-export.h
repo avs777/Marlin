@@ -8,7 +8,7 @@
 //
 // Info
 //
-#define STRING_CONFIG_H_AUTHOR                   "Marlin, Creality, Kraplax & Navaismo"
+#define STRING_CONFIG_H_AUTHOR                   "Marlin, Creality, Kraplax, Navaismo & AVS"
 
 //
 // Machine

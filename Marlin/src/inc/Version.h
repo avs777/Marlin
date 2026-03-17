@@ -25,7 +25,7 @@
  * Release version. Leave the Marlin version or apply a custom scheme.
  */
 #ifndef SHORT_BUILD_VERSION
-  #define SHORT_BUILD_VERSION "avs v2.1.x krasnaya_5a" // AVS
+  #define SHORT_BUILD_VERSION "avs v2.1.x-20260316" // AVS
 #endif
 
 /**
