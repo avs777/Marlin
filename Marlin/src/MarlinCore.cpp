@@ -1742,19 +1742,10 @@ void setup() {
   TERN_(MARLIN_TEST_BUILD, runStartupTests());
 } // setup()
 
-/**
- * The main Marlin program loop
- *
- *  - Call marlin.idle() to handle all tasks between G-code commands
- *      Note that no G-codes from the queue can be executed during idle()
- *      but many G-codes can be called directly anytime like macros.
- *  - Check whether SD card auto-start is needed now.
- *  - Check whether SD print finishing is needed now.
- *  - Run one G-code command from the immediate or main command queue
- *    and open up one space. Commands in the main queue may come from sd
- *    card, host, or by direct injection. The queue will continue to fill
- *    as long as idle() or manage_inactivity() are being called.
- */
+// Creality DWIN LCD screen auto turn-off variables and flags
+#if ENABLED(DWIN_ZHOME_MENU)
+  uint8_t CZ_AFTER_HOMING = 10; 
+#endif
 
 #if HAS_DWIN_E3V2
   millis_t lMs_lcd_delay = 0;
@@ -1778,6 +1769,19 @@ void setup() {
   }
 #endif
 
+/**
+ * The main Marlin program loop
+ *
+ *  - Call marlin.idle() to handle all tasks between G-code commands
+ *      Note that no G-codes from the queue can be executed during idle()
+ *      but many G-codes can be called directly anytime like macros.
+ *  - Check whether SD card auto-start is needed now.
+ *  - Check whether SD print finishing is needed now.
+ *  - Run one G-code command from the immediate or main command queue
+ *    and open up one space. Commands in the main queue may come from sd
+ *    card, host, or by direct injection. The queue will continue to fill
+ *    as long as idle() or manage_inactivity() are being called.
+ */
 void loop() {
   do {
     marlin.idle();
