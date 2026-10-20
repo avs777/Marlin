@@ -1,5 +1,9 @@
 # Marlin for the Creality Ender-3 V3 SE
 
+AVS: My tweaks
+- Ender-3-V3-SE-bugfix-2.1.x-20261019-234255.bin - Updated PIDs, additional menus, include E shaping support
+
+
 An upstream-first Marlin 2.1.x bugfix fork for the **Creality Ender-3 V3 SE**.
 
 The goal of this repository is simple: **pull upstream Marlin at any time without regressions**. All fork-specific behavior is isolated behind a small, auditable boundary, and the machine configuration is generated from pristine upstream files plus a reviewed profile.

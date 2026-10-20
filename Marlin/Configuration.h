@@ -61,7 +61,7 @@
 // @section info
 
 // Author info of this build printed to the host during boot and M115
-#define STRING_CONFIG_H_AUTHOR "Marlin, Creality, Kraplax & Navaismo" // Original author or contributor.
+#define STRING_CONFIG_H_AUTHOR "Marlin, Creality, Kraplax, Navaismo & AVS" // Original author or contributor.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
 // @section machine
@@ -270,7 +270,7 @@
 #define ENABLE_AUTO_OFF_DISPLAY             // Enable automatic turn-off display function & brightness adjustment function
 #if ENABLED(ENABLE_AUTO_OFF_DISPLAY)
 
-  // #define DWIN_DIMM_MENU                    // Enable LCD Menu to Configure Brightness & DIMM parameters
+  #define DWIN_DIMM_MENU                    // Enable LCD Menu to Configure Brightness & DIMM parameters // AVS
 
   extern int16_t TURN_OFF_TIME;             // turn-off time: 5min
   extern int16_t DIMM_SCREEN_BRIGHTNESS;    // brightness 0x00-0xff:0
@@ -766,9 +766,9 @@
     #define DEFAULT_KI_LIST {   1.08,   1.08 }
     #define DEFAULT_KD_LIST { 114.00, 114.00 }
   #else
-    #define DEFAULT_KP  20.49
-    #define DEFAULT_KI   3.93
-    #define DEFAULT_KD 26.68
+    #define DEFAULT_KP  18.11 // AVS
+    #define DEFAULT_KI   3.19 // AVS
+    #define DEFAULT_KD  25.71 // AVS
   #endif
 #else
   #define BANG_MAX 255    // Limit hotend current while in bang-bang mode; 255=full current
@@ -866,9 +866,9 @@
 
   // 120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   // from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
-  #define DEFAULT_BED_KP  123.71
-  #define DEFAULT_BED_KI   14.29
-  #define DEFAULT_BED_KD 713.77
+  #define DEFAULT_BED_KP  151.50 // AVS
+  #define DEFAULT_BED_KI   15.91 // AVS
+  #define DEFAULT_BED_KD  961.57 // AVS
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #else
@@ -1992,7 +1992,7 @@
                                       // You'll need this much clearance above Z_MAX_POS to avoid grinding.
 
 #define Z_AFTER_HOMING         10   // (mm) Height to move to after homing (if Z was homed)
-//#define DWIN_ZHOME_MENU             // Enable LCD Menu to Configure Z Height after Homing 
+#define DWIN_ZHOME_MENU             // Enable LCD Menu to Configure Z Height after Homing // AVS
 #if ENABLED(DWIN_ZHOME_MENU)
   extern uint8_t CZ_AFTER_HOMING; 
 #endif
@@ -2669,7 +2669,7 @@
 #define PREHEAT_2_TEMP_BED    70
 #define PREHEAT_2_TEMP_CHAMBER 35
 #define PREHEAT_2_FAN_SPEED     0 // Value from 0 to 255
-// #define EXTRA_PREHEAT_LABELS   // Enable LCD Menu to Configure 2 Extra Preheat Materials
+#define EXTRA_PREHEAT_LABELS   // Enable LCD Menu to Configure 2 Extra Preheat Materials // AVS
 #if ENABLED(EXTRA_PREHEAT_LABELS)
   #define PREHEAT_3_LABEL       "PETG"
   #define PREHEAT_3_TEMP_HOTEND 240
@@ -2684,8 +2684,8 @@
   #define PREHEAT_4_FAN_SPEED    0//255 // Value from 0 to 255
 #endif
 
-//  #define PREHEAT_ALERT           // Enable an alert when preheating is complete
-// #define DWIN_CUSTOM_EXTRUDE     // Enable LCD Menu for Custom Extrude Functions
+#define PREHEAT_ALERT           // Enable an alert when preheating is complete // AVS
+#define DWIN_CUSTOM_EXTRUDE     // Enable LCD Menu for Custom Extrude Functions // AVS
 
 /**
  * @section nozzle park
