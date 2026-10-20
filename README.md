@@ -34,6 +34,7 @@
 - `Ender-3-SKR-bugfix-2.1.x-20260316-212000` - ^ + sync with latest Marlin `bugfix-2.1.x` updates
 - `Ender-3-SKR-bugfix-2.1.x-20260525-140000` - ^ + sync with latest Marlin `bugfix-2.1.x` updates
 - `Ender-3-SKR-bugfix-2.1.x-20260826-211500` - ^ + sync with latest Marlin `bugfix-2.1.x` updates
+- `Ender-3-SKR-bugfix-2.1.x-20261019-221000` - ^ + sync with latest Marlin `bugfix-2.1.x` updates
 
 
 <p align="center"><img src="buildroot/share/pixmaps/logo/marlin-outrun-nf-500.png" height="250" alt="MarlinFirmware's logo" /></p>
